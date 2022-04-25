@@ -19,6 +19,8 @@ class SonarBuildMaker implements JdkConfig, TestPublisher, SonarTrait, Cron {
 
 	String org = "spring-cloud"
 
+	String jdkVersion = jdk17()
+
 	SonarBuildMaker(DslFactory dsl) {
 		this.dsl = dsl
 	}
@@ -47,7 +49,7 @@ class SonarBuildMaker implements JdkConfig, TestPublisher, SonarTrait, Cron {
 					}
 				}
 			}
-			jdk jdk17()
+			jdk jdkVersion
 			steps defaultSteps()
 			publishers {
 				archiveArtifacts mavenJUnitResults()

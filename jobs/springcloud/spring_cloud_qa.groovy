@@ -12,16 +12,18 @@ DslFactory dsl = this
 	new SonarBuildMaker(dsl).buildSonar(project.repo)
 }
 
-Projects.SLEUTH.with {
-	SonarBuildMaker sonar = new SonarBuildMaker(dsl)
-	sonar.branchName = "3.1.x"
-	sonar.buildSonar(it.repo)
+new SonarBuildMaker(dsl).with {
+	branchName = "3.1.x"
+	jdkVersion = jdk8()
+	buildSonar(Projects.SLEUTH.repo)
 }
-Projects.SLEUTH_OTEL.with {
-	SonarBuildMaker sonar = new SonarBuildMaker(dsl)
-	sonar.org = "spring-projects-experimental"
-	sonar.buildSonar(it.repo)
+
+new SonarBuildMaker(dsl).with {
+	org = "spring-projects-experimental"
+	jdkVersion = jdk8()
+	buildSonar(Projects.SLEUTH_OTEL.repo)
 }
+
 // new ConsulMutationBuildMaker(dsl).build()
 new KubernetesSonarBuildMaker(dsl).buildSonar()
 // new MutationBuildMaker(dsl).build("spring-cloud-contract")
