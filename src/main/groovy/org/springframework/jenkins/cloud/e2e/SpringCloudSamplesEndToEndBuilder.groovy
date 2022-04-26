@@ -107,7 +107,7 @@ class SpringCloudSamplesEndToEndBuilder<T extends SpringCloudSamplesEndToEndBuil
 		maker.additionalEnvs = this.envs
 		return maker
 				.build(this.projectName, this.repoName, this.scriptName, this.cronExpr,
-				this.branchName, this.postBuildScripts, this.mavenTests, this.gradleTests,
-				this.label, this.wipeOutWorkspace, this.withNodeJs)
+						this.branchName, this.postBuildScripts, this.mavenTests, this.gradleTests,
+						this.label, this.wipeOutWorkspace, this.withNodeJs)
 	}
 }

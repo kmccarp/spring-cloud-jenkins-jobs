@@ -7,7 +7,7 @@ import groovy.transform.CompileStatic
  */
 @CompileStatic
 class BuildContext {
-    boolean upload = true
-    String branch
-    String jdk
+	boolean upload = true
+	String branch
+	String jdk
 }

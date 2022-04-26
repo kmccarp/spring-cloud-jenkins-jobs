@@ -1,7 +1,4 @@
 package org.springframework.jenkins.cloud.common
-
-import org.springframework.jenkins.common.job.Slack
-
 /**
  *
  * @author Marcin Grzejszczak

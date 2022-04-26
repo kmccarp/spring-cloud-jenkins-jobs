@@ -1,6 +1,7 @@
 package org.springframework.jenkins.cloud.e2e
 
 import javaposse.jobdsl.dsl.DslFactory
+
 /**
  * @author Marcin Grzejszczak
  */

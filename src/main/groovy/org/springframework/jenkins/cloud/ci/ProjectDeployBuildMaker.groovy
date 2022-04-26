@@ -1,6 +1,7 @@
 package org.springframework.jenkins.cloud.ci
 
 import javaposse.jobdsl.dsl.DslFactory
+
 import org.springframework.jenkins.cloud.common.BuildContext
 import org.springframework.jenkins.cloud.common.CloudCron
 import org.springframework.jenkins.cloud.common.Project
@@ -23,7 +24,7 @@ class ProjectDeployBuildMaker implements JdkConfig, TestPublisher, CloudCron,
 	Closure<Node> slack = { Node node -> SpringCloudNotification.cloudSlack(node) }
 
 
-    ProjectDeployBuildMaker(DslFactory dsl, ReleaseTrain train, Project project) {
+	ProjectDeployBuildMaker(DslFactory dsl, ReleaseTrain train, Project project) {
 		this.dsl = dsl
 		this.train = train
 		this.project = project
@@ -72,8 +73,8 @@ class ProjectDeployBuildMaker implements JdkConfig, TestPublisher, CloudCron,
 					string(githubToken(), githubTokenCredId())
 					if (project.buildSystem == Project.BuildSystem.GRADLE
 							|| project.buildSystem == Project.BuildSystem.BOTH) {
-						 string(gradlePublishKeyEnvVar(), gradlePublishKeySecretId())
-						 string(gradlePublishSecretEnvVar(), gradlePublishSecretSecretId())
+						string(gradlePublishKeyEnvVar(), gradlePublishKeySecretId())
+						string(gradlePublishSecretEnvVar(), gradlePublishSecretSecretId())
 					}
 				}
 				environmentVariables {

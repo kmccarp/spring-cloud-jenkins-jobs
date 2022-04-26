@@ -182,7 +182,7 @@ if [ -n "\$(type gtimeout)" ]; then gtimeout 10s docker ps -a -q | xargs -n 1 -P
 	String githubUserCredentialId() {
 		return '3a20bcaa-d8ad-48e3-901d-9fbc941376ee'
 	}
-	
+
 	String dockerhubUserNameEnvVar() {
 		return 'DOCKER_HUB_USERNAME'
 	}

@@ -1,6 +1,7 @@
 package org.springframework.jenkins.cloud.compatibility
 
 import javaposse.jobdsl.dsl.DslFactory
+
 import org.springframework.jenkins.cloud.common.BuildContext
 import org.springframework.jenkins.cloud.common.Project
 import org.springframework.jenkins.cloud.common.Projects

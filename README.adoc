@@ -17,35 +17,35 @@ The seed job for Spring Cloud should scan the `jobs/springcloud/*.groovy` files.
 
 Remember to add `src/main/groovy` and `src/main/resources` for processing
 
-WARNING: Remember that views can be overridden that's why the suggestion is to contain in one script all the logic needed to build a view
- for a single project (check out that `spring_cloud_views.groovy` is building all the `spring-cloud` views).
+WARNING: Remember that views can be overridden that's why the suggestion is to contain in one script all the logic needed to build a view for a single project (check out that `spring_cloud_views.groovy` is building all the `spring-cloud` views).
 
 == I want to add a new job
 
 If your job is a standard Spring Cloud job that:
 
- - can be built via `./mvnw clean install` and deployed with `./mvnw clean deploy`
- - has docs under `docs` and those docs can be built via `./mvnw clean install -Pdocs`
- - is using `spring-cloud-build` thanks to which boot version is parametrized
- - the job resides under the `spring-cloud` organization
+- can be built via `./mvnw clean install` and deployed with `./mvnw clean deploy`
+- has docs under `docs` and those docs can be built via `./mvnw clean install -Pdocs`
+- is using `spring-cloud-build` thanks to which boot version is parametrized
+- the job resides under the `spring-cloud` organization
 
-you can just go to `org.springframework.jenkins.cloud.common.AllCloudJobs` and add the name
-of the repo to `ALL_JOBS` list. That way the default CI jobs and views will be created for
-the main branch.
+you can just go to `org.springframework.jenkins.cloud.common.AllCloudJobs` and add the name of the repo to `ALL_JOBS` list.
+That way the default CI jobs and views will be created for the main branch.
 
-If your job needs to be building other branches except for main just add your proper
-entries to the `JOBS_WITH_BRANCHES` map in `org.springframework.jenkins.cloud.common.AllCloudJobs`.
+If your job needs to be building other branches except for main just add your proper entries to the `JOBS_WITH_BRANCHES` map in `org.springframework.jenkins.cloud.common.AllCloudJobs`.
 
 If you have some custom builds just add the entry to `ALL_JOBS` and `CUSTOM_BUILD_JOBS`.
- Next you should just create your own implementation (check `org.springframework.jenkins.cloud.ci.SpringCloudNetflixDeployBuildMaker`
- for an example). Remember also to call it from the seed job (e.g. `springcloud/spring_cloud.groovy:29` for Netflix).
+Next you should just create your own implementation (check `org.springframework.jenkins.cloud.ci.SpringCloudNetflixDeployBuildMaker`
+for an example).
+Remember also to call it from the seed job (e.g. `springcloud/spring_cloud.groovy:29` for Netflix).
 
-The views are automatically generated for you. They base on the name convention so check out
+The views are automatically generated for you.
+They base on the name convention so check out
 `springcloud/spring_cloud_views.groovy` - it's pretty straightforward.
 
 == I want to add a new compatibility job for a latest branch
 
-There's nothing that you have to do. If you've added the newest branch under `JOBS_WITH_BRANCHES`
+There's nothing that you have to do.
+If you've added the newest branch under `JOBS_WITH_BRANCHES`
 the project automatically takes the latest branch version and reuses it as point of entry for
 `JOBS_WITH_BRANCHES_FOR_COMPATIBILITY_BUILD`.
 
@@ -55,14 +55,14 @@ Just modify the default properties file contents here `AllCloudConstants.DEFAULT
 
 = Running Jenkins
 
-Just run 
+Just run
 
 [source]
 ----
 docker-compose up -d
 ----
 
-and your jenkins with plugins present in `plugins.txt` will be ready at port 8080. 
+and your jenkins with plugins present in `plugins.txt` will be ready at port 8080.
 
 In order to download the latest plugins:
 
@@ -81,7 +81,8 @@ Wait patiently for Jenkins to start - the job will be added automatically for yo
 IMPORTANT: We're using the JMH Jenkins plugin which is not available anywhere in the marketplace.
 We're trying to automate its installation but if it fails you can download the HPI from
 https://bintray.com/marcingrzejszczak/jenkins/download_file?file_path=jmh-jenkins%2F0.0.1%2Fjmhbenchmark.hpi[here]
-and upload it yourself. The tag is in the forked repo over https://github.com/marcingrzejszczak/jmh-jenkins/releases/tag/0.0.1[here]
+and upload it yourself.
+The tag is in the forked repo over https://github.com/marcingrzejszczak/jmh-jenkins/releases/tag/0.0.1[here]
 
 = Configuring Jenkins for Spring Cloud
 

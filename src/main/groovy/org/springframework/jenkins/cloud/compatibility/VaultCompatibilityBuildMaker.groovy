@@ -68,7 +68,7 @@ class VaultCompatibilityBuildMaker extends CompatibilityBuildMaker implements Ha
 				shell("""${antiPermgenAndJava7TlsHack(branchName)}
 						${preVaultShell()}
 						trap "{ ${postVaultShell()} }" EXIT
-						${ checkTests ? runTestsForBoot() : compileProductionForBoot()}
+						${checkTests ? runTestsForBoot() : compileProductionForBoot()}
 					""")
 			}
 			configure {

@@ -25,6 +25,7 @@ class Artifactory {
 		closure.delegate = maven
 		closure.call()
 	}
+
 	static void artifactoryMaven3Configurator(Node rootNode) {
 		artifactoryMaven3Configurator(rootNode, Closure.IDENTITY)
 	}

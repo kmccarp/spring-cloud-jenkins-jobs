@@ -1,150 +1,155 @@
 <project>
-    <actions></actions>
-    <description></description>
-    <keepDependencies>false</keepDependencies>
-    <properties>
-        <hudson.model.ParametersDefinitionProperty>
-            <parameterDefinitions>
-                <hudson.model.StringParameterDefinition>
-                    <name>SPRING_BOOT_VERSION</name>
-                    <defaultValue></defaultValue>
-                    <description>Which version of Spring Boot should be used for the build</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>SPRING_CLOUD_BUILD_BRANCH</name>
-                    <defaultValue>main</defaultValue>
-                    <description>Which branch of Spring Cloud Build should be checked out</description>
-                </hudson.model.StringParameterDefinition>
-            </parameterDefinitions>
-        </hudson.model.ParametersDefinitionProperty>
-    </properties>
-    <canRoam>true</canRoam>
-    <disabled>false</disabled>
-    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers></triggers>
-    <concurrentBuild>true</concurrentBuild>
-    <builders>
-        <hudson.tasks.Shell>
-            <command>		#!/bin/bash
-		set -o errexit
-		
-		echo "Logging to Dockerhub..."
-		docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
-		</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Maven>
-            <targets>--version</targets>
-            <mavenName>maven33</mavenName>
-            <jvmOptions></jvmOptions>
-            <usePrivateRepository>false</usePrivateRepository>
-        </hudson.tasks.Maven>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash -x
-					set -o errexit
-					
-		echo -e "Getting latest version of Spring Boot"
-		# Uncomment this to get latest version at all (not necessarily for the minor)
-		#CURRENT_BOOT_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | sed -ne '/&lt;latest&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
-		export CURRENT_BOOT_VERSION="${CURRENT_BOOT_VERSION:-}"
-		[[ -z "$CURRENT_BOOT_VERSION" ]] &amp;&amp; CURRENT_BOOT_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | grep "&lt;version&gt;2.5." | grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
-		echo -e "Latest version of boot minor [2.5] is [$CURRENT_BOOT_VERSION]"
+	<actions></actions>
+	<description></description>
+	<keepDependencies>false</keepDependencies>
+	<properties>
+		<hudson.model.ParametersDefinitionProperty>
+			<parameterDefinitions>
+				<hudson.model.StringParameterDefinition>
+					<name>SPRING_BOOT_VERSION</name>
+					<defaultValue></defaultValue>
+					<description>Which version of Spring Boot should be used for the build</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>SPRING_CLOUD_BUILD_BRANCH</name>
+					<defaultValue>main</defaultValue>
+					<description>Which branch of Spring Cloud Build should be checked out</description>
+				</hudson.model.StringParameterDefinition>
+			</parameterDefinitions>
+		</hudson.model.ParametersDefinitionProperty>
+	</properties>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers></triggers>
+	<concurrentBuild>true</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				set -o errexit
 
-					
-		echo "Removing stored spring-cloud-release-tools"
-		rm -rf ~/.m2/repository/org/springframework/cloud/internal
-		echo -e "Will:
-		1)Download releaser
-		2)Clone SC-Build
-		3)Use releaser to bump boot for SC-Build
-		4)Install new SC-Build locally
-		5)Build the project"
-		rm -rf target
-		mkdir -p target
-		export MAVEN_PATH=/opt/jenkins/data/tools/hudson.tasks.Maven_MavenInstallation/maven33/apache-maven-3.3.9/bin/
-		
-		function bootVersion {
-			local bootVersion="${1}"
-			curl --silent https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | grep "&lt;version&gt;${bootVersion}." | grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp' | xargs
-		}
+				echo "Logging to Dockerhub..."
+				docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Maven>
+			<targets>--version</targets>
+			<mavenName>maven33</mavenName>
+			<jvmOptions></jvmOptions>
+			<usePrivateRepository>false</usePrivateRepository>
+		</hudson.tasks.Maven>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash -x
+				set -o errexit
 
-		export SPRING_BOOT_VERSION="${SPRING_BOOT_VERSION:-}"
-		[[ -z "$SPRING_BOOT_VERSION" ]] &amp;&amp; SPRING_BOOT_VERSION="$( bootVersion "2.5" )"
-		echo "Boot version [$SPRING_BOOT_VERSION]" 
-		pushd target
-			${MAVEN_PATH}/mvn dependency:get -DremoteRepositories=https://repo.spring.io/libs-snapshot-local -Dartifact=org.springframework.cloud.internal:spring-cloud:2.0.0-SNAPSHOT -Dtransitive=false
-			${MAVEN_PATH}/mvn dependency:copy -Dartifact=org.springframework.cloud.internal:spring-cloud:2.0.0-SNAPSHOT -Dproject.basedir=../
-			mv dependency/*.jar dependency/spring-cloud-2.0.0-SNAPSHOT.jar
-			echo "Cloning Spring Cloud Build"
-			git clone https://github.com/spring-cloud/spring-cloud-build.git
-			pushd spring-cloud-build
+				echo -e "Getting latest version of Spring Boot"
+				# Uncomment this to get latest version at all (not necessarily for the minor)
+				#CURRENT_BOOT_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | sed -ne '/&lt;latest&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
+				export CURRENT_BOOT_VERSION="${CURRENT_BOOT_VERSION:-}"
+				[[ -z "$CURRENT_BOOT_VERSION" ]] &amp;&amp; CURRENT_BOOT_VERSION="$( curl
+				https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | grep "&lt;version&gt;2.5." | grep "SNAPSHOT" | tail -1
+				| sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
+				echo -e "Latest version of boot minor [2.5] is [$CURRENT_BOOT_VERSION]"
+
+
+				echo "Removing stored spring-cloud-release-tools"
+				rm -rf ~/.m2/repository/org/springframework/cloud/internal
+				echo -e "Will:
+				1)Download releaser
+				2)Clone SC-Build
+				3)Use releaser to bump boot for SC-Build
+				4)Install new SC-Build locally
+				5)Build the project"
+				rm -rf target
+				mkdir -p target
+				export MAVEN_PATH=/opt/jenkins/data/tools/hudson.tasks.Maven_MavenInstallation/maven33/apache-maven-3.3.9/bin/
+
+				function bootVersion {
+				local bootVersion="${1}"
+				curl --silent https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | grep "&lt;version&gt;${bootVersion}." |
+				grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp' | xargs
+				}
+
+				export SPRING_BOOT_VERSION="${SPRING_BOOT_VERSION:-}"
+				[[ -z "$SPRING_BOOT_VERSION" ]] &amp;&amp; SPRING_BOOT_VERSION="$( bootVersion "2.5" )"
+				echo "Boot version [$SPRING_BOOT_VERSION]"
+				pushd target
+				${MAVEN_PATH}/mvn dependency:get -DremoteRepositories=https://repo.spring.io/libs-snapshot-local
+				-Dartifact=org.springframework.cloud.internal:spring-cloud:2.0.0-SNAPSHOT -Dtransitive=false
+				${MAVEN_PATH}/mvn dependency:copy -Dartifact=org.springframework.cloud.internal:spring-cloud:2.0.0-SNAPSHOT -Dproject.basedir=../
+				mv dependency/*.jar dependency/spring-cloud-2.0.0-SNAPSHOT.jar
+				echo "Cloning Spring Cloud Build"
+				git clone https://github.com/spring-cloud/spring-cloud-build.git
+				pushd spring-cloud-build
 				SPRING_CLOUD_BUILD_BRANCH="${SPRING_CLOUD_BUILD_BRANCH:-main}"
 				git checkout "$SPRING_CLOUD_BUILD_BRANCH"
 				echo -e "Updating SC-Build's Boot version [$SPRING_BOOT_VERSION]"
-				java -jar ../dependency/spring-cloud-2.0.0-SNAPSHOT.jar --releaser.git.fetch-versions-from-git=false --"releaser.fixed-versions[spring-boot]=$SPRING_BOOT_VERSION" --"releaser.fixed-versions[spring-boot-dependencies]=$SPRING_BOOT_VERSION" --releaser.git.oauth-token="token" -u -i=false
+				java -jar ../dependency/spring-cloud-2.0.0-SNAPSHOT.jar --releaser.git.fetch-versions-from-git=false --"releaser.fixed-versions[spring-boot]=$SPRING_BOOT_VERSION"
+				--"releaser.fixed-versions[spring-boot-dependencies]=$SPRING_BOOT_VERSION" --releaser.git.oauth-token="token" -u -i=false
 				trap "echo 'Clearing spring-cloud-build jars' &amp;&amp; rm -rf ~/.m2/repository/org/springframework/cloud/spring-cloud-build/" EXIT
 				./mvnw clean install -fae -U
-			popd
-		popd
+				popd
+				popd
 
-					echo -e "Checking if prod code compiles against latest boot"
-					./mvnw clean package -U -fae -Dspring-boot.version=$SPRING_BOOT_VERSION -DskipTests
-					
-					echo -e "Printing the list of dependencies"
-					./mvnw dependency:tree -Dspring-boot.version=$SPRING_BOOT_VERSION
-			
-</command>
-        </hudson.tasks.Shell>
-    </builders>
-    <publishers>
-        <jenkins.plugins.slack.SlackNotifier>
-            <startNotification>false</startNotification>
-            <notifySuccess>false</notifySuccess>
-            <notifyAborted>false</notifyAborted>
-            <notifyNotBuilt>false</notifyNotBuilt>
-            <notifyUnstable>true</notifyUnstable>
-            <notifyFailure>false</notifyFailure>
-            <notifyBackToNormal>false</notifyBackToNormal>
-            <notifyRepeatedFailure>true</notifyRepeatedFailure>
-            <notifyRegression>false</notifyRegression>
-            <includeTestSummary>true</includeTestSummary>
-            <includeFailedTests>true</includeFailedTests>
-            <showCommitList>true</showCommitList>
-            <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
-            <room>spring-cloud-firehose</room>
-        </jenkins.plugins.slack.SlackNotifier>
-    </publishers>
-    <buildWrappers>
-        <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-            <bindings>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>hub.docker.com-springbuildmaster</credentialsId>
-                    <usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
-                    <passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-            </bindings>
-        </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-    </buildWrappers>
-    <jdk>jdk8</jdk>
-    <scm class='hudson.plugins.git.GitSCM'>
-        <userRemoteConfigs>
-            <hudson.plugins.git.UserRemoteConfig>
-                <url>https://github.com/spring-cloud/spring-cloud-release</url>
-            </hudson.plugins.git.UserRemoteConfig>
-        </userRemoteConfigs>
-        <branches>
-            <hudson.plugins.git.BranchSpec>
-                <name>main</name>
-            </hudson.plugins.git.BranchSpec>
-        </branches>
-        <configVersion>2</configVersion>
-        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <gitTool>Default</gitTool>
-        <extensions>
-            <hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
-            <hudson.plugins.git.extensions.impl.LocalBranch>
-                <localBranch>**</localBranch>
-            </hudson.plugins.git.extensions.impl.LocalBranch>
-        </extensions>
-    </scm>
+				echo -e "Checking if prod code compiles against latest boot"
+				./mvnw clean package -U -fae -Dspring-boot.version=$SPRING_BOOT_VERSION -DskipTests
+
+				echo -e "Printing the list of dependencies"
+				./mvnw dependency:tree -Dspring-boot.version=$SPRING_BOOT_VERSION
+
+			</command>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers>
+		<jenkins.plugins.slack.SlackNotifier>
+			<startNotification>false</startNotification>
+			<notifySuccess>false</notifySuccess>
+			<notifyAborted>false</notifyAborted>
+			<notifyNotBuilt>false</notifyNotBuilt>
+			<notifyUnstable>true</notifyUnstable>
+			<notifyFailure>false</notifyFailure>
+			<notifyBackToNormal>false</notifyBackToNormal>
+			<notifyRepeatedFailure>true</notifyRepeatedFailure>
+			<notifyRegression>false</notifyRegression>
+			<includeTestSummary>true</includeTestSummary>
+			<includeFailedTests>true</includeFailedTests>
+			<showCommitList>true</showCommitList>
+			<commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+			<room>spring-cloud-firehose</room>
+		</jenkins.plugins.slack.SlackNotifier>
+	</publishers>
+	<buildWrappers>
+		<org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+			<bindings>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>hub.docker.com-springbuildmaster</credentialsId>
+					<usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
+					<passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+			</bindings>
+		</org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+	</buildWrappers>
+	<jdk>jdk8</jdk>
+	<scm class='hudson.plugins.git.GitSCM'>
+		<userRemoteConfigs>
+			<hudson.plugins.git.UserRemoteConfig>
+				<url>https://github.com/spring-cloud/spring-cloud-release</url>
+			</hudson.plugins.git.UserRemoteConfig>
+		</userRemoteConfigs>
+		<branches>
+			<hudson.plugins.git.BranchSpec>
+				<name>main</name>
+			</hudson.plugins.git.BranchSpec>
+		</branches>
+		<configVersion>2</configVersion>
+		<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+		<gitTool>Default</gitTool>
+		<extensions>
+			<hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
+			<hudson.plugins.git.extensions.impl.LocalBranch>
+				<localBranch>**</localBranch>
+			</hudson.plugins.git.extensions.impl.LocalBranch>
+		</extensions>
+	</scm>
 </project>

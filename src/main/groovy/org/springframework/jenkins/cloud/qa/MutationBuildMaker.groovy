@@ -3,9 +3,7 @@ package org.springframework.jenkins.cloud.qa
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.helpers.step.StepContext
 
-import org.springframework.jenkins.cloud.common.PitestPublisher
 import org.springframework.jenkins.cloud.common.SpringCloudNotification
-import org.springframework.jenkins.cloud.common.TapPublisher
 import org.springframework.jenkins.common.job.Cron
 import org.springframework.jenkins.common.job.JdkConfig
 import org.springframework.jenkins.common.job.SonarTrait

@@ -1,153 +1,156 @@
 <project>
-    <actions></actions>
-    <description></description>
-    <keepDependencies>false</keepDependencies>
-    <properties></properties>
-    <canRoam>false</canRoam>
-    <disabled>false</disabled>
-    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers>
-        <hudson.triggers.TimerTrigger>
-            <spec>H H/3 * * *</spec>
-        </hudson.triggers.TimerTrigger>
-        <com.cloudbees.jenkins.GitHubPushTrigger>
-            <spec></spec>
-        </com.cloudbees.jenkins.GitHubPushTrigger>
-    </triggers>
-    <concurrentBuild>false</concurrentBuild>
-    <builders>
-        <hudson.tasks.Shell>
-            <command>		#!/bin/bash
-		set -o errexit
-		
-		echo "Logging to Dockerhub..."
-		docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
-		</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>rm -rf /opt/jenkins/data/tools/hudson.tasks.Maven_MavenInstallation/maven33/</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
-if [ -n "$(type -t timeout)" ]; then timeout 10s docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {} || echo "Failed to stop docker... Hopefully you know what you're doing"; fi
-if [ -n "$(type gtimeout)" ]; then gtimeout 10s docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {} || echo "Failed to stop docker... Hopefully you know what you're doing"; fi
-</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Maven>
-            <targets>--version</targets>
-            <mavenName>maven33</mavenName>
-            <jvmOptions></jvmOptions>
-            <usePrivateRepository>false</usePrivateRepository>
-        </hudson.tasks.Maven>
-        <hudson.tasks.Shell>
-            <command>						#!/bin/bash -x
-export MAVEN_OPTS="-Xms256M -Xmx1024M -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=4096M -Dhttps.protocols=TLSv1.2"
-						 #!/bin/bash
-					echo "Kill Vault"
-					pkill vault &amp;&amp; echo "Vault killed" || echo "No Vault process was running"
+	<actions></actions>
+	<description></description>
+	<keepDependencies>false</keepDependencies>
+	<properties></properties>
+	<canRoam>false</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H H/3 * * *</spec>
+		</hudson.triggers.TimerTrigger>
+		<com.cloudbees.jenkins.GitHubPushTrigger>
+			<spec></spec>
+		</com.cloudbees.jenkins.GitHubPushTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				set -o errexit
 
-					echo "Install Vault"
-					./src/test/bash/create_certificates.sh
-					./src/test/bash/install_vault.sh
+				echo "Logging to Dockerhub..."
+				docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>rm -rf /opt/jenkins/data/tools/hudson.tasks.Maven_MavenInstallation/maven33/</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				if [ -n "$(type -t timeout)" ]; then timeout 10s docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {} || echo "Failed to stop docker... Hopefully you know what
+				you're doing"; fi
+				if [ -n "$(type gtimeout)" ]; then gtimeout 10s docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {} || echo "Failed to stop docker... Hopefully you know what
+				you're doing"; fi
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Maven>
+			<targets>--version</targets>
+			<mavenName>maven33</mavenName>
+			<jvmOptions></jvmOptions>
+			<usePrivateRepository>false</usePrivateRepository>
+		</hudson.tasks.Maven>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash -x
+				export MAVEN_OPTS="-Xms256M -Xmx1024M -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -XX:+UseConcMarkSweepGC
+				-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=4096M -Dhttps.protocols=TLSv1.2"
+				#!/bin/bash
+				echo "Kill Vault"
+				pkill vault &amp;&amp; echo "Vault killed" || echo "No Vault process was running"
 
-					echo "Run Vault"
-					./src/test/bash/local_run_vault.sh &amp;
-					echo "Vault Running"
-				
-						trap "{ pkill vault &amp;&amp; echo 'Vault killed' || echo 'No Vault process was running'; }" EXIT
-						./mvnw clean deploy -Pdocs,deploy,spring -B -U
-					</command>
-        </hudson.tasks.Shell>
-    </builders>
-    <publishers>
-        <jenkins.plugins.slack.SlackNotifier>
-            <startNotification>false</startNotification>
-            <notifySuccess>false</notifySuccess>
-            <notifyAborted>false</notifyAborted>
-            <notifyNotBuilt>false</notifyNotBuilt>
-            <notifyUnstable>true</notifyUnstable>
-            <notifyFailure>false</notifyFailure>
-            <notifyBackToNormal>false</notifyBackToNormal>
-            <notifyRepeatedFailure>true</notifyRepeatedFailure>
-            <notifyRegression>false</notifyRegression>
-            <includeTestSummary>true</includeTestSummary>
-            <includeFailedTests>true</includeFailedTests>
-            <showCommitList>true</showCommitList>
-            <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
-            <room>spring-cloud-firehose</room>
-        </jenkins.plugins.slack.SlackNotifier>
-        <hudson.tasks.junit.JUnitResultArchiver>
-            <testResults>**/surefire-reports/*.xml</testResults>
-            <keepLongStdio>false</keepLongStdio>
-            <testDataPublishers></testDataPublishers>
-            <allowEmptyResults>false</allowEmptyResults>
-            <healthScaleFactor>1.0</healthScaleFactor>
-        </hudson.tasks.junit.JUnitResultArchiver>
-    </publishers>
-    <buildWrappers>
-        <hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
-        <hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-            <colorMapName>xterm</colorMapName>
-        </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-        <com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper></com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
-        <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-            <bindings>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>hub.docker.com-springbuildmaster</credentialsId>
-                    <usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
-                    <passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>3a20bcaa-d8ad-48e3-901d-9fbc941376ee</credentialsId>
-                    <usernameVariable>GITHUB_REPO_USERNAME</usernameVariable>
-                    <passwordVariable>GITHUB_REPO_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
-                    <variable>RELEASER_GIT_OAUTH_TOKEN</variable>
-                    <credentialsId>7b3ebbea-7001-479b-8578-b8c464dab973</credentialsId>
-                </org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
-            </bindings>
-        </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-        <EnvInjectBuildWrapper>
-            <info>
-                <propertiesContent>BRANCH=2.2.x</propertiesContent>
-                <loadFilesFromMaster>false</loadFilesFromMaster>
-            </info>
-        </EnvInjectBuildWrapper>
-        <hudson.plugins.build__timeout.BuildTimeoutWrapper>
-            <strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
-                <timeout>600000</timeout>
-            </strategy>
-            <operationList>
-                <hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
-                <hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-                    <description>Build failed due to timeout after {0} minutes of inactivity</description>
-                </hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-            </operationList>
-        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-    </buildWrappers>
-    <jdk>jdk8</jdk>
-    <assignedNode>linux&amp;&amp;jdk8</assignedNode>
-    <scm class='hudson.plugins.git.GitSCM'>
-        <userRemoteConfigs>
-            <hudson.plugins.git.UserRemoteConfig>
-                <url>https://github.com/spring-cloud/spring-cloud-vault</url>
-            </hudson.plugins.git.UserRemoteConfig>
-        </userRemoteConfigs>
-        <branches>
-            <hudson.plugins.git.BranchSpec>
-                <name>2.2.x</name>
-            </hudson.plugins.git.BranchSpec>
-        </branches>
-        <configVersion>2</configVersion>
-        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <gitTool>Default</gitTool>
-        <extensions>
-            <hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
-            <hudson.plugins.git.extensions.impl.LocalBranch>
-                <localBranch>**</localBranch>
-            </hudson.plugins.git.extensions.impl.LocalBranch>
-        </extensions>
-    </scm>
+				echo "Install Vault"
+				./src/test/bash/create_certificates.sh
+				./src/test/bash/install_vault.sh
+
+				echo "Run Vault"
+				./src/test/bash/local_run_vault.sh &amp;
+				echo "Vault Running"
+
+				trap "{ pkill vault &amp;&amp; echo 'Vault killed' || echo 'No Vault process was running'; }" EXIT
+				./mvnw clean deploy -Pdocs,deploy,spring -B -U
+			</command>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers>
+		<jenkins.plugins.slack.SlackNotifier>
+			<startNotification>false</startNotification>
+			<notifySuccess>false</notifySuccess>
+			<notifyAborted>false</notifyAborted>
+			<notifyNotBuilt>false</notifyNotBuilt>
+			<notifyUnstable>true</notifyUnstable>
+			<notifyFailure>false</notifyFailure>
+			<notifyBackToNormal>false</notifyBackToNormal>
+			<notifyRepeatedFailure>true</notifyRepeatedFailure>
+			<notifyRegression>false</notifyRegression>
+			<includeTestSummary>true</includeTestSummary>
+			<includeFailedTests>true</includeFailedTests>
+			<showCommitList>true</showCommitList>
+			<commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+			<room>spring-cloud-firehose</room>
+		</jenkins.plugins.slack.SlackNotifier>
+		<hudson.tasks.junit.JUnitResultArchiver>
+			<testResults>**/surefire-reports/*.xml</testResults>
+			<keepLongStdio>false</keepLongStdio>
+			<testDataPublishers></testDataPublishers>
+			<allowEmptyResults>false</allowEmptyResults>
+			<healthScaleFactor>1.0</healthScaleFactor>
+		</hudson.tasks.junit.JUnitResultArchiver>
+	</publishers>
+	<buildWrappers>
+		<hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
+		<hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+			<colorMapName>xterm</colorMapName>
+		</hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+		<com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper></com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
+		<org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+			<bindings>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>hub.docker.com-springbuildmaster</credentialsId>
+					<usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
+					<passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>3a20bcaa-d8ad-48e3-901d-9fbc941376ee</credentialsId>
+					<usernameVariable>GITHUB_REPO_USERNAME</usernameVariable>
+					<passwordVariable>GITHUB_REPO_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
+					<variable>RELEASER_GIT_OAUTH_TOKEN</variable>
+					<credentialsId>7b3ebbea-7001-479b-8578-b8c464dab973</credentialsId>
+				</org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
+			</bindings>
+		</org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+		<EnvInjectBuildWrapper>
+			<info>
+				<propertiesContent>BRANCH=2.2.x</propertiesContent>
+				<loadFilesFromMaster>false</loadFilesFromMaster>
+			</info>
+		</EnvInjectBuildWrapper>
+		<hudson.plugins.build__timeout.BuildTimeoutWrapper>
+			<strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
+				<timeout>600000</timeout>
+			</strategy>
+			<operationList>
+				<hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
+				<hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+					<description>Build failed due to timeout after {0} minutes of inactivity</description>
+				</hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+			</operationList>
+		</hudson.plugins.build__timeout.BuildTimeoutWrapper>
+	</buildWrappers>
+	<jdk>jdk8</jdk>
+	<assignedNode>linux&amp;&amp;jdk8</assignedNode>
+	<scm class='hudson.plugins.git.GitSCM'>
+		<userRemoteConfigs>
+			<hudson.plugins.git.UserRemoteConfig>
+				<url>https://github.com/spring-cloud/spring-cloud-vault</url>
+			</hudson.plugins.git.UserRemoteConfig>
+		</userRemoteConfigs>
+		<branches>
+			<hudson.plugins.git.BranchSpec>
+				<name>2.2.x</name>
+			</hudson.plugins.git.BranchSpec>
+		</branches>
+		<configVersion>2</configVersion>
+		<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+		<gitTool>Default</gitTool>
+		<extensions>
+			<hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
+			<hudson.plugins.git.extensions.impl.LocalBranch>
+				<localBranch>**</localBranch>
+			</hudson.plugins.git.extensions.impl.LocalBranch>
+		</extensions>
+	</scm>
 </project>

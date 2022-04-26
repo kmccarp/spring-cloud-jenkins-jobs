@@ -1,12 +1,9 @@
 package org.springframework.jenkins.cloud.release
 
-
 import javaposse.jobdsl.dsl.DslFactory
 
 import org.springframework.jenkins.cloud.common.SpringCloudJobs
-import org.springframework.jenkins.cloud.common.SpringCloudNotification
-import org.springframework.jenkins.common.job.JdkConfig
-import org.springframework.jenkins.common.job.TestPublisher
+
 /**
  * @author Marcin Grzejszczak
  */

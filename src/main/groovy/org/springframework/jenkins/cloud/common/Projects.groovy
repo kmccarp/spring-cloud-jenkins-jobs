@@ -131,6 +131,6 @@ class Projects {
 											 RELEASE, TRAIN_DOCS, SLEUTH, STREAM, TASK, VAULT, ZOOKEEPER, SQUARE,
 											 SLEUTH_OTEL, RELEASE_TOOLS]
 
-	public static final Map<String, Project> ALL_BY_NAME = ALL.collectEntries { [it.repo, it]}
+	public static final Map<String, Project> ALL_BY_NAME = ALL.collectEntries { [it.repo, it] }
 
 }

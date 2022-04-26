@@ -1,6 +1,7 @@
 package springcloud
 
 import javaposse.jobdsl.dsl.DslFactory
+
 import org.springframework.jenkins.cloud.common.Projects
 import org.springframework.jenkins.cloud.qa.KubernetesSonarBuildMaker
 import org.springframework.jenkins.cloud.qa.SonarBuildMaker

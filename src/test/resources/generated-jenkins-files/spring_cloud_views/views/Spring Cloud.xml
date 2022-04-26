@@ -1,457 +1,457 @@
 <hudson.plugins.nested__view.NestedView>
-    <filterExecutors>false</filterExecutors>
-    <filterQueue>false</filterQueue>
-    <properties class='hudson.model.View$PropertyList'></properties>
-    <views>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*-compatibility-check</includeRegex>
-            <name>Boot.NEXT</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-                <string>spring-cloud-compatibility-boot-check</string>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <name>Boot.MANUAL</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*-compatibility-spring-check</includeRegex>
-            <name>Spring.NEXT</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-                <string>spring-cloud-compatibility-spring-check</string>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <name>Spring.MANUAL</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*-ci</includeRegex>
-            <name>CI</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*main-ci</includeRegex>
-            <name>CI.MAIN</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-                <string>spring-cloud-build-3.0.x-ci</string>
-                <string>spring-cloud-bus-3.0.x-ci</string>
-                <string>spring-cloud-circuitbreaker-2.0.x-ci</string>
-                <string>spring-cloud-cli-3.0.x-ci</string>
-                <string>spring-cloud-cloudfoundry-3.0.x-ci</string>
-                <string>spring-cloud-commons-3.0.x-ci</string>
-                <string>spring-cloud-config-3.0.x-ci</string>
-                <string>spring-cloud-consul-3.0.x-ci</string>
-                <string>spring-cloud-contract-3.0.x-ci</string>
-                <string>spring-cloud-function-3.1.x-ci</string>
-                <string>spring-cloud-gateway-3.0.x-ci</string>
-                <string>spring-cloud-kubernetes-2.0.x-ci</string>
-                <string>spring-cloud-netflix-3.0.x-ci</string>
-                <string>spring-cloud-openfeign-3.0.x-ci</string>
-                <string>spring-cloud-release-2020.0.x-ci</string>
-                <string>spring-cloud-sleuth-3.0.x-ci</string>
-                <string>spring-cloud-stream-3.1.x-ci</string>
-                <string>spring-cloud-task-2.3.x-ci</string>
-                <string>spring-cloud-tests-2020.0.x-e2e</string>
-                <string>spring-cloud-vault-3.0.x-ci</string>
-                <string>spring-cloud-zookeeper-3.0.x-ci</string>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <name>CI.ilford</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-                <string>spring-cloud-build-3.1.x-ci</string>
-                <string>spring-cloud-bus-3.1.x-ci</string>
-                <string>spring-cloud-circuitbreaker-2.1.x-ci</string>
-                <string>spring-cloud-cli-3.1.x-ci</string>
-                <string>spring-cloud-cloudfoundry-3.1.x-ci</string>
-                <string>spring-cloud-commons-3.1.x-ci</string>
-                <string>spring-cloud-config-3.1.x-ci</string>
-                <string>spring-cloud-consul-3.1.x-ci</string>
-                <string>spring-cloud-contract-3.1.x-ci</string>
-                <string>spring-cloud-function-3.2.x-ci</string>
-                <string>spring-cloud-gateway-3.1.x-ci</string>
-                <string>spring-cloud-kubernetes-2.1.x-ci</string>
-                <string>spring-cloud-netflix-3.1.x-ci</string>
-                <string>spring-cloud-openfeign-3.1.x-ci</string>
-                <string>spring-cloud-release-2021.0.x-ci</string>
-                <string>spring-cloud-sleuth-3.1.x-ci</string>
-                <string>spring-cloud-stream-3.2.x-ci</string>
-                <string>spring-cloud-task-2.4.x-ci</string>
-                <string>spring-cloud-tests-2021.0.x-e2e</string>
-                <string>spring-cloud-vault-3.1.x-ci</string>
-                <string>spring-cloud-zookeeper-3.1.x-ci</string>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <name>CI.Jubilee</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-                <string>spring-cloud-build-main-ci</string>
-                <string>spring-cloud-bus-main-ci</string>
-                <string>spring-cloud-circuitbreaker-main-ci</string>
-                <string>spring-cloud-commons-main-ci</string>
-                <string>spring-cloud-config-main-ci</string>
-                <string>spring-cloud-consul-main-ci</string>
-                <string>spring-cloud-contract-main-ci</string>
-                <string>spring-cloud-function-main-ci</string>
-                <string>spring-cloud-gateway-main-ci</string>
-                <string>spring-cloud-kubernetes-main-ci</string>
-                <string>spring-cloud-netflix-main-ci</string>
-                <string>spring-cloud-openfeign-main-ci</string>
-                <string>spring-cloud-release-main-ci</string>
-                <string>spring-cloud-stream-main-ci</string>
-                <string>spring-cloud-task-main-ci</string>
-                <string>spring-cloud-tests-main-e2e</string>
-                <string>spring-cloud-vault-main-ci</string>
-                <string>spring-cloud-zookeeper-main-ci</string>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <name>CI.Kilburn</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*jdk.*</includeRegex>
-            <name>JDK</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*-e2e</includeRegex>
-            <name>E2E</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*-releaser</includeRegex>
-            <name>Releaser</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*-sonar</includeRegex>
-            <name>Sonar</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*-qa-.*</includeRegex>
-            <name>QA</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-        <hudson.plugins.nested__view.NestedView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <views>
-                <se.diabol.jenkins.pipeline.DeliveryPipelineView>
-                    <filterExecutors>false</filterExecutors>
-                    <filterQueue>false</filterQueue>
-                    <properties class='hudson.model.View$PropertyList'></properties>
-                    <noOfPipelines>5</noOfPipelines>
-                    <showAggregatedPipeline>false</showAggregatedPipeline>
-                    <noOfColumns>1</noOfColumns>
-                    <sorting>none</sorting>
-                    <showAvatars>true</showAvatars>
-                    <updateInterval>5</updateInterval>
-                    <showChanges>true</showChanges>
-                    <allowManualTriggers>true</allowManualTriggers>
-                    <allowPipelineStart>true</allowPipelineStart>
-                    <componentSpecs>
-                        <se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
-                            <name>Deploy github-analytics to production</name>
-                            <firstJob>github-analytics-pipeline-build</firstJob>
-                        </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
-                    </componentSpecs>
-                    <allowRebuild>true</allowRebuild>
-                    <showDescription>true</showDescription>
-                    <showPromotions>true</showPromotions>
-                    <showTotalBuildTime>true</showTotalBuildTime>
-                    <showTestResults>true</showTestResults>
-                    <pagingEnabled>true</pagingEnabled>
-                    <name>github-analytics-pipeline</name>
-                    <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-                </se.diabol.jenkins.pipeline.DeliveryPipelineView>
-                <se.diabol.jenkins.pipeline.DeliveryPipelineView>
-                    <filterExecutors>false</filterExecutors>
-                    <filterQueue>false</filterQueue>
-                    <properties class='hudson.model.View$PropertyList'></properties>
-                    <noOfPipelines>5</noOfPipelines>
-                    <showAggregatedPipeline>false</showAggregatedPipeline>
-                    <noOfColumns>1</noOfColumns>
-                    <sorting>none</sorting>
-                    <showAvatars>true</showAvatars>
-                    <updateInterval>5</updateInterval>
-                    <showChanges>true</showChanges>
-                    <allowManualTriggers>true</allowManualTriggers>
-                    <allowPipelineStart>true</allowPipelineStart>
-                    <componentSpecs>
-                        <se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
-                            <name>Deploy github-webhook to production</name>
-                            <firstJob>github-webhook-pipeline-build</firstJob>
-                        </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
-                    </componentSpecs>
-                    <allowRebuild>true</allowRebuild>
-                    <showDescription>true</showDescription>
-                    <showPromotions>true</showPromotions>
-                    <showTotalBuildTime>true</showTotalBuildTime>
-                    <showTestResults>true</showTestResults>
-                    <pagingEnabled>true</pagingEnabled>
-                    <name>github-webhook-pipeline</name>
-                    <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-                </se.diabol.jenkins.pipeline.DeliveryPipelineView>
-                <se.diabol.jenkins.pipeline.DeliveryPipelineView>
-                    <filterExecutors>false</filterExecutors>
-                    <filterQueue>false</filterQueue>
-                    <properties class='hudson.model.View$PropertyList'></properties>
-                    <noOfPipelines>5</noOfPipelines>
-                    <showAggregatedPipeline>false</showAggregatedPipeline>
-                    <noOfColumns>1</noOfColumns>
-                    <sorting>none</sorting>
-                    <showAvatars>true</showAvatars>
-                    <updateInterval>5</updateInterval>
-                    <showChanges>true</showChanges>
-                    <allowManualTriggers>true</allowManualTriggers>
-                    <allowPipelineStart>true</allowPipelineStart>
-                    <componentSpecs>
-                        <se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
-                            <name>Deploy app-monolith to production</name>
-                            <firstJob>app-monolith-pipeline-build</firstJob>
-                        </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
-                    </componentSpecs>
-                    <allowRebuild>true</allowRebuild>
-                    <showDescription>true</showDescription>
-                    <showPromotions>true</showPromotions>
-                    <showTotalBuildTime>true</showTotalBuildTime>
-                    <showTestResults>true</showTestResults>
-                    <pagingEnabled>true</pagingEnabled>
-                    <name>app-monolith-pipeline</name>
-                    <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-                </se.diabol.jenkins.pipeline.DeliveryPipelineView>
-            </views>
-            <name>CD-pipelines</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.plugins.nested__view.NestedView>
-        <hudson.model.ListView>
-            <filterExecutors>false</filterExecutors>
-            <filterQueue>false</filterQueue>
-            <properties class='hudson.model.View$PropertyList'></properties>
-            <jobNames class='tree-set'>
-                <comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
-            </jobNames>
-            <jobFilters></jobFilters>
-            <columns>
-                <hudson.views.StatusColumn></hudson.views.StatusColumn>
-                <hudson.views.JobColumn></hudson.views.JobColumn>
-                <hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
-                <hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
-                <jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
-                <hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
-            </columns>
-            <includeRegex>spring-cloud.*</includeRegex>
-            <name>All Cloud</name>
-            <owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
-        </hudson.model.ListView>
-    </views>
+	<filterExecutors>false</filterExecutors>
+	<filterQueue>false</filterQueue>
+	<properties class='hudson.model.View$PropertyList'></properties>
+	<views>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*-compatibility-check</includeRegex>
+			<name>Boot.NEXT</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+				<string>spring-cloud-compatibility-boot-check</string>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<name>Boot.MANUAL</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*-compatibility-spring-check</includeRegex>
+			<name>Spring.NEXT</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+				<string>spring-cloud-compatibility-spring-check</string>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<name>Spring.MANUAL</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*-ci</includeRegex>
+			<name>CI</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*main-ci</includeRegex>
+			<name>CI.MAIN</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+				<string>spring-cloud-build-3.0.x-ci</string>
+				<string>spring-cloud-bus-3.0.x-ci</string>
+				<string>spring-cloud-circuitbreaker-2.0.x-ci</string>
+				<string>spring-cloud-cli-3.0.x-ci</string>
+				<string>spring-cloud-cloudfoundry-3.0.x-ci</string>
+				<string>spring-cloud-commons-3.0.x-ci</string>
+				<string>spring-cloud-config-3.0.x-ci</string>
+				<string>spring-cloud-consul-3.0.x-ci</string>
+				<string>spring-cloud-contract-3.0.x-ci</string>
+				<string>spring-cloud-function-3.1.x-ci</string>
+				<string>spring-cloud-gateway-3.0.x-ci</string>
+				<string>spring-cloud-kubernetes-2.0.x-ci</string>
+				<string>spring-cloud-netflix-3.0.x-ci</string>
+				<string>spring-cloud-openfeign-3.0.x-ci</string>
+				<string>spring-cloud-release-2020.0.x-ci</string>
+				<string>spring-cloud-sleuth-3.0.x-ci</string>
+				<string>spring-cloud-stream-3.1.x-ci</string>
+				<string>spring-cloud-task-2.3.x-ci</string>
+				<string>spring-cloud-tests-2020.0.x-e2e</string>
+				<string>spring-cloud-vault-3.0.x-ci</string>
+				<string>spring-cloud-zookeeper-3.0.x-ci</string>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<name>CI.ilford</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+				<string>spring-cloud-build-3.1.x-ci</string>
+				<string>spring-cloud-bus-3.1.x-ci</string>
+				<string>spring-cloud-circuitbreaker-2.1.x-ci</string>
+				<string>spring-cloud-cli-3.1.x-ci</string>
+				<string>spring-cloud-cloudfoundry-3.1.x-ci</string>
+				<string>spring-cloud-commons-3.1.x-ci</string>
+				<string>spring-cloud-config-3.1.x-ci</string>
+				<string>spring-cloud-consul-3.1.x-ci</string>
+				<string>spring-cloud-contract-3.1.x-ci</string>
+				<string>spring-cloud-function-3.2.x-ci</string>
+				<string>spring-cloud-gateway-3.1.x-ci</string>
+				<string>spring-cloud-kubernetes-2.1.x-ci</string>
+				<string>spring-cloud-netflix-3.1.x-ci</string>
+				<string>spring-cloud-openfeign-3.1.x-ci</string>
+				<string>spring-cloud-release-2021.0.x-ci</string>
+				<string>spring-cloud-sleuth-3.1.x-ci</string>
+				<string>spring-cloud-stream-3.2.x-ci</string>
+				<string>spring-cloud-task-2.4.x-ci</string>
+				<string>spring-cloud-tests-2021.0.x-e2e</string>
+				<string>spring-cloud-vault-3.1.x-ci</string>
+				<string>spring-cloud-zookeeper-3.1.x-ci</string>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<name>CI.Jubilee</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+				<string>spring-cloud-build-main-ci</string>
+				<string>spring-cloud-bus-main-ci</string>
+				<string>spring-cloud-circuitbreaker-main-ci</string>
+				<string>spring-cloud-commons-main-ci</string>
+				<string>spring-cloud-config-main-ci</string>
+				<string>spring-cloud-consul-main-ci</string>
+				<string>spring-cloud-contract-main-ci</string>
+				<string>spring-cloud-function-main-ci</string>
+				<string>spring-cloud-gateway-main-ci</string>
+				<string>spring-cloud-kubernetes-main-ci</string>
+				<string>spring-cloud-netflix-main-ci</string>
+				<string>spring-cloud-openfeign-main-ci</string>
+				<string>spring-cloud-release-main-ci</string>
+				<string>spring-cloud-stream-main-ci</string>
+				<string>spring-cloud-task-main-ci</string>
+				<string>spring-cloud-tests-main-e2e</string>
+				<string>spring-cloud-vault-main-ci</string>
+				<string>spring-cloud-zookeeper-main-ci</string>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<name>CI.Kilburn</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*jdk.*</includeRegex>
+			<name>JDK</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*-e2e</includeRegex>
+			<name>E2E</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*-releaser</includeRegex>
+			<name>Releaser</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*-sonar</includeRegex>
+			<name>Sonar</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*-qa-.*</includeRegex>
+			<name>QA</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+		<hudson.plugins.nested__view.NestedView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<views>
+				<se.diabol.jenkins.pipeline.DeliveryPipelineView>
+					<filterExecutors>false</filterExecutors>
+					<filterQueue>false</filterQueue>
+					<properties class='hudson.model.View$PropertyList'></properties>
+					<noOfPipelines>5</noOfPipelines>
+					<showAggregatedPipeline>false</showAggregatedPipeline>
+					<noOfColumns>1</noOfColumns>
+					<sorting>none</sorting>
+					<showAvatars>true</showAvatars>
+					<updateInterval>5</updateInterval>
+					<showChanges>true</showChanges>
+					<allowManualTriggers>true</allowManualTriggers>
+					<allowPipelineStart>true</allowPipelineStart>
+					<componentSpecs>
+						<se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+							<name>Deploy github-analytics to production</name>
+							<firstJob>github-analytics-pipeline-build</firstJob>
+						</se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+					</componentSpecs>
+					<allowRebuild>true</allowRebuild>
+					<showDescription>true</showDescription>
+					<showPromotions>true</showPromotions>
+					<showTotalBuildTime>true</showTotalBuildTime>
+					<showTestResults>true</showTestResults>
+					<pagingEnabled>true</pagingEnabled>
+					<name>github-analytics-pipeline</name>
+					<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+				</se.diabol.jenkins.pipeline.DeliveryPipelineView>
+				<se.diabol.jenkins.pipeline.DeliveryPipelineView>
+					<filterExecutors>false</filterExecutors>
+					<filterQueue>false</filterQueue>
+					<properties class='hudson.model.View$PropertyList'></properties>
+					<noOfPipelines>5</noOfPipelines>
+					<showAggregatedPipeline>false</showAggregatedPipeline>
+					<noOfColumns>1</noOfColumns>
+					<sorting>none</sorting>
+					<showAvatars>true</showAvatars>
+					<updateInterval>5</updateInterval>
+					<showChanges>true</showChanges>
+					<allowManualTriggers>true</allowManualTriggers>
+					<allowPipelineStart>true</allowPipelineStart>
+					<componentSpecs>
+						<se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+							<name>Deploy github-webhook to production</name>
+							<firstJob>github-webhook-pipeline-build</firstJob>
+						</se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+					</componentSpecs>
+					<allowRebuild>true</allowRebuild>
+					<showDescription>true</showDescription>
+					<showPromotions>true</showPromotions>
+					<showTotalBuildTime>true</showTotalBuildTime>
+					<showTestResults>true</showTestResults>
+					<pagingEnabled>true</pagingEnabled>
+					<name>github-webhook-pipeline</name>
+					<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+				</se.diabol.jenkins.pipeline.DeliveryPipelineView>
+				<se.diabol.jenkins.pipeline.DeliveryPipelineView>
+					<filterExecutors>false</filterExecutors>
+					<filterQueue>false</filterQueue>
+					<properties class='hudson.model.View$PropertyList'></properties>
+					<noOfPipelines>5</noOfPipelines>
+					<showAggregatedPipeline>false</showAggregatedPipeline>
+					<noOfColumns>1</noOfColumns>
+					<sorting>none</sorting>
+					<showAvatars>true</showAvatars>
+					<updateInterval>5</updateInterval>
+					<showChanges>true</showChanges>
+					<allowManualTriggers>true</allowManualTriggers>
+					<allowPipelineStart>true</allowPipelineStart>
+					<componentSpecs>
+						<se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+							<name>Deploy app-monolith to production</name>
+							<firstJob>app-monolith-pipeline-build</firstJob>
+						</se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
+					</componentSpecs>
+					<allowRebuild>true</allowRebuild>
+					<showDescription>true</showDescription>
+					<showPromotions>true</showPromotions>
+					<showTotalBuildTime>true</showTotalBuildTime>
+					<showTestResults>true</showTestResults>
+					<pagingEnabled>true</pagingEnabled>
+					<name>app-monolith-pipeline</name>
+					<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+				</se.diabol.jenkins.pipeline.DeliveryPipelineView>
+			</views>
+			<name>CD-pipelines</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.plugins.nested__view.NestedView>
+		<hudson.model.ListView>
+			<filterExecutors>false</filterExecutors>
+			<filterQueue>false</filterQueue>
+			<properties class='hudson.model.View$PropertyList'></properties>
+			<jobNames class='tree-set'>
+				<comparator class='hudson.util.CaseInsensitiveComparator'></comparator>
+			</jobNames>
+			<jobFilters></jobFilters>
+			<columns>
+				<hudson.views.StatusColumn></hudson.views.StatusColumn>
+				<hudson.views.JobColumn></hudson.views.JobColumn>
+				<hudson.views.LastSuccessColumn></hudson.views.LastSuccessColumn>
+				<hudson.views.LastFailureColumn></hudson.views.LastFailureColumn>
+				<jenkins.plugins.extracolumns.LastBuildConsoleColumn></jenkins.plugins.extracolumns.LastBuildConsoleColumn>
+				<hudson.views.BuildButtonColumn></hudson.views.BuildButtonColumn>
+			</columns>
+			<includeRegex>spring-cloud.*</includeRegex>
+			<name>All Cloud</name>
+			<owner reference='../../..' class='hudson.plugins.nested_view.NestedView'></owner>
+		</hudson.model.ListView>
+	</views>
 </hudson.plugins.nested__view.NestedView>

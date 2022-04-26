@@ -7,7 +7,6 @@ import org.springframework.jenkins.cloud.common.CloudCron
 import org.springframework.jenkins.cloud.common.SpringCloudJobs
 import org.springframework.jenkins.common.job.JdkConfig
 import org.springframework.jenkins.common.job.Maven
-import org.springframework.jenkins.common.job.Slack
 import org.springframework.jenkins.common.job.TestPublisher
 
 /**

@@ -1,126 +1,127 @@
 <project>
-    <actions></actions>
-    <description></description>
-    <keepDependencies>false</keepDependencies>
-    <properties>
-        <EnvInjectJobProperty>
-            <info>
-                <propertiesContent>KILL_AT_THE_END=yes
-TERM=dumb
-RETRIES=70
-SKIP_COMPATIBILITY=true
-SKIP_DOCS=true</propertiesContent>
-                <loadFilesFromMaster>false</loadFilesFromMaster>
-            </info>
-            <on>true</on>
-            <keepJenkinsSystemVariables>true</keepJenkinsSystemVariables>
-            <keepBuildVariables>true</keepBuildVariables>
-            <overrideBuildParameters>false</overrideBuildParameters>
-            <contributors></contributors>
-        </EnvInjectJobProperty>
-    </properties>
-    <canRoam>true</canRoam>
-    <disabled>false</disabled>
-    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers>
-        <hudson.triggers.TimerTrigger>
-            <spec>H H * * *</spec>
-        </hudson.triggers.TimerTrigger>
-    </triggers>
-    <concurrentBuild>false</concurrentBuild>
-    <builders>
-        <hudson.tasks.Shell>
-            <command>		#!/bin/bash
-		set -o errexit
-		
-		echo "Logging to Dockerhub..."
-		docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
-		</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
-						echo "Cleaning up .m2"
-						rm -rf ~/.m2/repository/org/springframework/cloud/
-						echo "Clearing up the gradle cache"
-						rm -rf ~/.gradle/caches/modules-2/files-2.1/
-						./scripts/runMavenBuilds.sh
-					</command>
-        </hudson.tasks.Shell>
-    </builders>
-    <publishers>
-        <jenkins.plugins.slack.SlackNotifier>
-            <startNotification>false</startNotification>
-            <notifySuccess>false</notifySuccess>
-            <notifyAborted>false</notifyAborted>
-            <notifyNotBuilt>false</notifyNotBuilt>
-            <notifyUnstable>true</notifyUnstable>
-            <notifyFailure>false</notifyFailure>
-            <notifyBackToNormal>false</notifyBackToNormal>
-            <notifyRepeatedFailure>true</notifyRepeatedFailure>
-            <notifyRegression>false</notifyRegression>
-            <includeTestSummary>true</includeTestSummary>
-            <includeFailedTests>true</includeFailedTests>
-            <showCommitList>true</showCommitList>
-            <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
-            <room>spring-cloud-firehose</room>
-        </jenkins.plugins.slack.SlackNotifier>
-        <hudson.tasks.junit.JUnitResultArchiver>
-            <testResults>**/*-reports/*.xml</testResults>
-            <keepLongStdio>false</keepLongStdio>
-            <testDataPublishers></testDataPublishers>
-            <allowEmptyResults>false</allowEmptyResults>
-            <healthScaleFactor>1.0</healthScaleFactor>
-        </hudson.tasks.junit.JUnitResultArchiver>
-    </publishers>
-    <buildWrappers>
-        <hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
-        <hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-            <colorMapName>xterm</colorMapName>
-        </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-        <hudson.plugins.build__timeout.BuildTimeoutWrapper>
-            <strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
-                <timeout>1800000</timeout>
-            </strategy>
-            <operationList>
-                <hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
-                <hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-                    <description>Build failed due to timeout after {0} minutes of inactivity</description>
-                </hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-            </operationList>
-        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-        <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-            <bindings>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>hub.docker.com-springbuildmaster</credentialsId>
-                    <usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
-                    <passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-            </bindings>
-        </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-    </buildWrappers>
-    <jdk>jdk11</jdk>
-    <assignedNode></assignedNode>
-    <scm class='hudson.plugins.git.GitSCM'>
-        <userRemoteConfigs>
-            <hudson.plugins.git.UserRemoteConfig>
-                <url>https://github.com/spring-cloud-samples/spring-cloud-contract-samples</url>
-                <credentialsId>3a20bcaa-d8ad-48e3-901d-9fbc941376ee</credentialsId>
-            </hudson.plugins.git.UserRemoteConfig>
-        </userRemoteConfigs>
-        <branches>
-            <hudson.plugins.git.BranchSpec>
-                <name>main</name>
-            </hudson.plugins.git.BranchSpec>
-        </branches>
-        <configVersion>2</configVersion>
-        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <gitTool>Default</gitTool>
-        <extensions>
-            <hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
-            <hudson.plugins.git.extensions.impl.LocalBranch>
-                <localBranch>**</localBranch>
-            </hudson.plugins.git.extensions.impl.LocalBranch>
-        </extensions>
-    </scm>
+	<actions></actions>
+	<description></description>
+	<keepDependencies>false</keepDependencies>
+	<properties>
+		<EnvInjectJobProperty>
+			<info>
+				<propertiesContent>KILL_AT_THE_END=yes
+					TERM=dumb
+					RETRIES=70
+					SKIP_COMPATIBILITY=true
+					SKIP_DOCS=true
+				</propertiesContent>
+				<loadFilesFromMaster>false</loadFilesFromMaster>
+			</info>
+			<on>true</on>
+			<keepJenkinsSystemVariables>true</keepJenkinsSystemVariables>
+			<keepBuildVariables>true</keepBuildVariables>
+			<overrideBuildParameters>false</overrideBuildParameters>
+			<contributors></contributors>
+		</EnvInjectJobProperty>
+	</properties>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H H * * *</spec>
+		</hudson.triggers.TimerTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				set -o errexit
+
+				echo "Logging to Dockerhub..."
+				docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				echo "Cleaning up .m2"
+				rm -rf ~/.m2/repository/org/springframework/cloud/
+				echo "Clearing up the gradle cache"
+				rm -rf ~/.gradle/caches/modules-2/files-2.1/
+				./scripts/runMavenBuilds.sh
+			</command>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers>
+		<jenkins.plugins.slack.SlackNotifier>
+			<startNotification>false</startNotification>
+			<notifySuccess>false</notifySuccess>
+			<notifyAborted>false</notifyAborted>
+			<notifyNotBuilt>false</notifyNotBuilt>
+			<notifyUnstable>true</notifyUnstable>
+			<notifyFailure>false</notifyFailure>
+			<notifyBackToNormal>false</notifyBackToNormal>
+			<notifyRepeatedFailure>true</notifyRepeatedFailure>
+			<notifyRegression>false</notifyRegression>
+			<includeTestSummary>true</includeTestSummary>
+			<includeFailedTests>true</includeFailedTests>
+			<showCommitList>true</showCommitList>
+			<commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+			<room>spring-cloud-firehose</room>
+		</jenkins.plugins.slack.SlackNotifier>
+		<hudson.tasks.junit.JUnitResultArchiver>
+			<testResults>**/*-reports/*.xml</testResults>
+			<keepLongStdio>false</keepLongStdio>
+			<testDataPublishers></testDataPublishers>
+			<allowEmptyResults>false</allowEmptyResults>
+			<healthScaleFactor>1.0</healthScaleFactor>
+		</hudson.tasks.junit.JUnitResultArchiver>
+	</publishers>
+	<buildWrappers>
+		<hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
+		<hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+			<colorMapName>xterm</colorMapName>
+		</hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+		<hudson.plugins.build__timeout.BuildTimeoutWrapper>
+			<strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
+				<timeout>1800000</timeout>
+			</strategy>
+			<operationList>
+				<hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
+				<hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+					<description>Build failed due to timeout after {0} minutes of inactivity</description>
+				</hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+			</operationList>
+		</hudson.plugins.build__timeout.BuildTimeoutWrapper>
+		<org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+			<bindings>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>hub.docker.com-springbuildmaster</credentialsId>
+					<usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
+					<passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+			</bindings>
+		</org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+	</buildWrappers>
+	<jdk>jdk11</jdk>
+	<assignedNode></assignedNode>
+	<scm class='hudson.plugins.git.GitSCM'>
+		<userRemoteConfigs>
+			<hudson.plugins.git.UserRemoteConfig>
+				<url>https://github.com/spring-cloud-samples/spring-cloud-contract-samples</url>
+				<credentialsId>3a20bcaa-d8ad-48e3-901d-9fbc941376ee</credentialsId>
+			</hudson.plugins.git.UserRemoteConfig>
+		</userRemoteConfigs>
+		<branches>
+			<hudson.plugins.git.BranchSpec>
+				<name>main</name>
+			</hudson.plugins.git.BranchSpec>
+		</branches>
+		<configVersion>2</configVersion>
+		<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+		<gitTool>Default</gitTool>
+		<extensions>
+			<hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
+			<hudson.plugins.git.extensions.impl.LocalBranch>
+				<localBranch>**</localBranch>
+			</hudson.plugins.git.extensions.impl.LocalBranch>
+		</extensions>
+	</scm>
 </project>

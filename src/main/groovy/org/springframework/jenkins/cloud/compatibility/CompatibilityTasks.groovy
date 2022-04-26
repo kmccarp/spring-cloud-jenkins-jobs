@@ -1,8 +1,8 @@
 package org.springframework.jenkins.cloud.compatibility
 
 import groovy.transform.CompileStatic
-import groovy.transform.PackageScope
 import javaposse.jobdsl.dsl.helpers.step.StepContext
+
 import org.springframework.jenkins.cloud.common.AllCloudConstants
 import org.springframework.jenkins.cloud.common.SpringCloudJobs
 import org.springframework.jenkins.common.job.Maven

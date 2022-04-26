@@ -1,129 +1,133 @@
 <project>
-    <actions></actions>
-    <description></description>
-    <keepDependencies>false</keepDependencies>
-    <properties></properties>
-    <canRoam>true</canRoam>
-    <disabled>false</disabled>
-    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers>
-        <hudson.triggers.TimerTrigger>
-            <spec>H H/6 * * *</spec>
-        </hudson.triggers.TimerTrigger>
-    </triggers>
-    <concurrentBuild>false</concurrentBuild>
-    <builders>
-        <hudson.tasks.Shell>
-            <command>		#!/bin/bash
-		set -o errexit
-		
-		echo "Logging to Dockerhub..."
-		docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
-		</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
-						set -o errexit
-						set -o errtrace
-						set -o nounset
-						set -o pipefail
-						
-						echo "Current java version"
-						java -version
-						
-		echo -e "Getting latest version of Spring Boot"
-		# Uncomment this to get latest version at all (not necessarily for the minor)
-		#CURRENT_BOOT_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | sed -ne '/&lt;latest&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
-		export CURRENT_BOOT_VERSION="${CURRENT_BOOT_VERSION:-}"
-		[[ -z "$CURRENT_BOOT_VERSION" ]] &amp;&amp; CURRENT_BOOT_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | grep "&lt;version&gt;3.0." | grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
-		echo -e "Latest version of boot minor [3.0] is [$CURRENT_BOOT_VERSION]"
+	<actions></actions>
+	<description></description>
+	<keepDependencies>false</keepDependencies>
+	<properties></properties>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H H/6 * * *</spec>
+		</hudson.triggers.TimerTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				set -o errexit
 
-						
-		echo -e "Getting latest version of Spring Cloud"
-		# Uncomment this to get latest version at all (not necessarily for the minor)
-		#CURRENT_CLOUD_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/cloud/spring-cloud-starter-build/maven-metadata.xml | sed -ne '/&lt;latest&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
-		export CURRENT_CLOUD_VERSION="${CURRENT_CLOUD_VERSION:-}"
-		[[ -z "$CURRENT_CLOUD_VERSION" ]] &amp;&amp; CURRENT_CLOUD_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/cloud/spring-cloud-starter-build/maven-metadata.xml | grep "&lt;version&gt;2020.0." | grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
-		echo -e "Latest version of cloud for minor [2020.0] is [$CURRENT_CLOUD_VERSION]"
+				echo "Logging to Dockerhub..."
+				docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				set -o errexit
+				set -o errtrace
+				set -o nounset
+				set -o pipefail
+
+				echo "Current java version"
+				java -version
+
+				echo -e "Getting latest version of Spring Boot"
+				# Uncomment this to get latest version at all (not necessarily for the minor)
+				#CURRENT_BOOT_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | sed -ne '/&lt;latest&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
+				export CURRENT_BOOT_VERSION="${CURRENT_BOOT_VERSION:-}"
+				[[ -z "$CURRENT_BOOT_VERSION" ]] &amp;&amp; CURRENT_BOOT_VERSION="$( curl
+				https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | grep "&lt;version&gt;3.0." | grep "SNAPSHOT" | tail -1
+				| sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
+				echo -e "Latest version of boot minor [3.0] is [$CURRENT_BOOT_VERSION]"
 
 
-						echo "Running the build with cloud train [$CURRENT_CLOUD_VERSION] and Boot version [$CURRENT_BOOT_VERSION]"
-						./scripts/runAcceptanceTests.sh
-					</command>
-        </hudson.tasks.Shell>
-    </builders>
-    <publishers>
-        <jenkins.plugins.slack.SlackNotifier>
-            <startNotification>false</startNotification>
-            <notifySuccess>false</notifySuccess>
-            <notifyAborted>false</notifyAborted>
-            <notifyNotBuilt>false</notifyNotBuilt>
-            <notifyUnstable>true</notifyUnstable>
-            <notifyFailure>false</notifyFailure>
-            <notifyBackToNormal>false</notifyBackToNormal>
-            <notifyRepeatedFailure>true</notifyRepeatedFailure>
-            <notifyRegression>false</notifyRegression>
-            <includeTestSummary>true</includeTestSummary>
-            <includeFailedTests>true</includeFailedTests>
-            <showCommitList>true</showCommitList>
-            <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
-            <room>spring-cloud-firehose</room>
-        </jenkins.plugins.slack.SlackNotifier>
-        <hudson.tasks.junit.JUnitResultArchiver>
-            <testResults>**/surefire-reports/*.xml</testResults>
-            <keepLongStdio>false</keepLongStdio>
-            <testDataPublishers></testDataPublishers>
-            <allowEmptyResults>false</allowEmptyResults>
-            <healthScaleFactor>1.0</healthScaleFactor>
-        </hudson.tasks.junit.JUnitResultArchiver>
-    </publishers>
-    <buildWrappers>
-        <hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
-        <hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-            <colorMapName>xterm</colorMapName>
-        </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-        <hudson.plugins.build__timeout.BuildTimeoutWrapper>
-            <strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
-                <timeout>1800000</timeout>
-            </strategy>
-            <operationList>
-                <hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
-                <hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-                    <description>Build failed due to timeout after {0} minutes of inactivity</description>
-                </hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-            </operationList>
-        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-        <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-            <bindings>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>hub.docker.com-springbuildmaster</credentialsId>
-                    <usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
-                    <passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-            </bindings>
-        </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-    </buildWrappers>
-    <jdk>jdk11</jdk>
-    <scm class='hudson.plugins.git.GitSCM'>
-        <userRemoteConfigs>
-            <hudson.plugins.git.UserRemoteConfig>
-                <url>https://github.com/spring-cloud-samples/tests</url>
-            </hudson.plugins.git.UserRemoteConfig>
-        </userRemoteConfigs>
-        <branches>
-            <hudson.plugins.git.BranchSpec>
-                <name>2020.0.x</name>
-            </hudson.plugins.git.BranchSpec>
-        </branches>
-        <configVersion>2</configVersion>
-        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <gitTool>Default</gitTool>
-        <extensions>
-            <hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
-            <hudson.plugins.git.extensions.impl.LocalBranch>
-                <localBranch>**</localBranch>
-            </hudson.plugins.git.extensions.impl.LocalBranch>
-        </extensions>
-    </scm>
+				echo -e "Getting latest version of Spring Cloud"
+				# Uncomment this to get latest version at all (not necessarily for the minor)
+				#CURRENT_CLOUD_VERSION="$( curl https://repo.spring.io/libs-snapshot-local/org/springframework/cloud/spring-cloud-starter-build/maven-metadata.xml | sed -ne '/&lt;latest&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
+				export CURRENT_CLOUD_VERSION="${CURRENT_CLOUD_VERSION:-}"
+				[[ -z "$CURRENT_CLOUD_VERSION" ]] &amp;&amp; CURRENT_CLOUD_VERSION="$( curl
+				https://repo.spring.io/libs-snapshot-local/org/springframework/cloud/spring-cloud-starter-build/maven-metadata.xml | grep "&lt;version&gt;2020.0." | grep "SNAPSHOT"
+				| tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp')"
+				echo -e "Latest version of cloud for minor [2020.0] is [$CURRENT_CLOUD_VERSION]"
+
+
+				echo "Running the build with cloud train [$CURRENT_CLOUD_VERSION] and Boot version [$CURRENT_BOOT_VERSION]"
+				./scripts/runAcceptanceTests.sh
+			</command>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers>
+		<jenkins.plugins.slack.SlackNotifier>
+			<startNotification>false</startNotification>
+			<notifySuccess>false</notifySuccess>
+			<notifyAborted>false</notifyAborted>
+			<notifyNotBuilt>false</notifyNotBuilt>
+			<notifyUnstable>true</notifyUnstable>
+			<notifyFailure>false</notifyFailure>
+			<notifyBackToNormal>false</notifyBackToNormal>
+			<notifyRepeatedFailure>true</notifyRepeatedFailure>
+			<notifyRegression>false</notifyRegression>
+			<includeTestSummary>true</includeTestSummary>
+			<includeFailedTests>true</includeFailedTests>
+			<showCommitList>true</showCommitList>
+			<commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+			<room>spring-cloud-firehose</room>
+		</jenkins.plugins.slack.SlackNotifier>
+		<hudson.tasks.junit.JUnitResultArchiver>
+			<testResults>**/surefire-reports/*.xml</testResults>
+			<keepLongStdio>false</keepLongStdio>
+			<testDataPublishers></testDataPublishers>
+			<allowEmptyResults>false</allowEmptyResults>
+			<healthScaleFactor>1.0</healthScaleFactor>
+		</hudson.tasks.junit.JUnitResultArchiver>
+	</publishers>
+	<buildWrappers>
+		<hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
+		<hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+			<colorMapName>xterm</colorMapName>
+		</hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+		<hudson.plugins.build__timeout.BuildTimeoutWrapper>
+			<strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
+				<timeout>1800000</timeout>
+			</strategy>
+			<operationList>
+				<hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
+				<hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+					<description>Build failed due to timeout after {0} minutes of inactivity</description>
+				</hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+			</operationList>
+		</hudson.plugins.build__timeout.BuildTimeoutWrapper>
+		<org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+			<bindings>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>hub.docker.com-springbuildmaster</credentialsId>
+					<usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
+					<passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+			</bindings>
+		</org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+	</buildWrappers>
+	<jdk>jdk11</jdk>
+	<scm class='hudson.plugins.git.GitSCM'>
+		<userRemoteConfigs>
+			<hudson.plugins.git.UserRemoteConfig>
+				<url>https://github.com/spring-cloud-samples/tests</url>
+			</hudson.plugins.git.UserRemoteConfig>
+		</userRemoteConfigs>
+		<branches>
+			<hudson.plugins.git.BranchSpec>
+				<name>2020.0.x</name>
+			</hudson.plugins.git.BranchSpec>
+		</branches>
+		<configVersion>2</configVersion>
+		<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+		<gitTool>Default</gitTool>
+		<extensions>
+			<hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
+			<hudson.plugins.git.extensions.impl.LocalBranch>
+				<localBranch>**</localBranch>
+			</hudson.plugins.git.extensions.impl.LocalBranch>
+		</extensions>
+	</scm>
 </project>

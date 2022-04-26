@@ -1,282 +1,291 @@
 <project>
-    <actions></actions>
-    <description></description>
-    <keepDependencies>false</keepDependencies>
-    <properties>
-        <hudson.model.ParametersDefinitionProperty>
-            <parameterDefinitions>
-                <hudson.model.StringParameterDefinition>
-                    <name>BRANCH</name>
-                    <defaultValue>main</defaultValue>
-                    <description>Your project's branch</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASE_VERSION</name>
-                    <defaultValue></defaultValue>
-                    <description>Name of the release (e.g. Hoxton.RELEASE). Will correspond to the properties file (e.g. hoxton_release.properties) in the branch with releaser properties</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_BRANCH</name>
-                    <defaultValue>main</defaultValue>
-                    <description>Branch for the releaser code</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_CONFIG_URL</name>
-                    <defaultValue>https://raw.githubusercontent.com/spring-cloud/spring-cloud-release</defaultValue>
-                    <description>Root of the URL where the RAW version of the configuration file is present</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_CONFIG_BRANCH</name>
-                    <defaultValue>jenkins-releaser-config</defaultValue>
-                    <description>Branch, where the RAW version of the configuration file is present</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_POM_BRANCH</name>
-                    <defaultValue>main</defaultValue>
-                    <description>Spring Cloud Release branch. If [RELEASE_VERSION] was passed, then this will be ignored</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_ADDITIONAL_PROPS</name>
-                    <defaultValue></defaultValue>
-                    <description>Additional system properties</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_META_RELEASE_RELEASE_TRAIN_PROJECT_NAME</name>
-                    <defaultValue>spring-cloud-release</defaultValue>
-                    <description>Name of the project that represents the BOM of the release train</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_GIT_RELEASE_TRAIN_BOM</name>
-                    <defaultValue>https://github.com/spring-cloud/spring-cloud-release</defaultValue>
-                    <description>Subfolder of the pom that contains the versions for the release train</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_META_RELEASE_GIT_ORG_URL</name>
-                    <defaultValue>https://github.com/spring-cloud</defaultValue>
-                    <description>URL of the organization from which projects can be cloned</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>RELEASER_POM_THIS_TRAIN</name>
-                    <defaultValue>spring-cloud-dependencies/pom.xml</defaultValue>
-                    <description>URL to a project containing a BOM. Defaults to Spring Cloud Release Git repository</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.BooleanParameterDefinition>
-                    <name>RELEASER_SAGAN_UPDATE</name>
-                    <defaultValue>false</defaultValue>
-                    <description>If true then will update documentation repository with the current URL</description>
-                </hudson.model.BooleanParameterDefinition>
-                <hudson.model.BooleanParameterDefinition>
-                    <name>RELEASER_POST_RELEASE_ONLY</name>
-                    <defaultValue>false</defaultValue>
-                    <description>If set to true will run only post release tasks</description>
-                </hudson.model.BooleanParameterDefinition>
-                <hudson.model.BooleanParameterDefinition>
-                    <name>DRY_RUN</name>
-                    <defaultValue>false</defaultValue>
-                    <description>If true then will run meta-release in a dry run mode</description>
-                </hudson.model.BooleanParameterDefinition>
-            </parameterDefinitions>
-        </hudson.model.ParametersDefinitionProperty>
-    </properties>
-    <canRoam>true</canRoam>
-    <disabled>false</disabled>
-    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers>
-        <hudson.triggers.TimerTrigger>
-            <spec>H H * * *</spec>
-        </hudson.triggers.TimerTrigger>
-    </triggers>
-    <concurrentBuild>false</concurrentBuild>
-    <builders>
-        <hudson.tasks.Shell>
-            <command>		#!/bin/bash
-		set -o errexit
-		
-		echo "Logging to Dockerhub..."
-		docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
-		</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
+	<actions></actions>
+	<description></description>
+	<keepDependencies>false</keepDependencies>
+	<properties>
+		<hudson.model.ParametersDefinitionProperty>
+			<parameterDefinitions>
+				<hudson.model.StringParameterDefinition>
+					<name>BRANCH</name>
+					<defaultValue>main</defaultValue>
+					<description>Your project's branch</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASE_VERSION</name>
+					<defaultValue></defaultValue>
+					<description>Name of the release (e.g. Hoxton.RELEASE). Will correspond to the properties file (e.g. hoxton_release.properties) in the branch with releaser
+						properties
+					</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_BRANCH</name>
+					<defaultValue>main</defaultValue>
+					<description>Branch for the releaser code</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_CONFIG_URL</name>
+					<defaultValue>https://raw.githubusercontent.com/spring-cloud/spring-cloud-release</defaultValue>
+					<description>Root of the URL where the RAW version of the configuration file is present</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_CONFIG_BRANCH</name>
+					<defaultValue>jenkins-releaser-config</defaultValue>
+					<description>Branch, where the RAW version of the configuration file is present</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_POM_BRANCH</name>
+					<defaultValue>main</defaultValue>
+					<description>Spring Cloud Release branch. If [RELEASE_VERSION] was passed, then this will be ignored</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_ADDITIONAL_PROPS</name>
+					<defaultValue></defaultValue>
+					<description>Additional system properties</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_META_RELEASE_RELEASE_TRAIN_PROJECT_NAME</name>
+					<defaultValue>spring-cloud-release</defaultValue>
+					<description>Name of the project that represents the BOM of the release train</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_GIT_RELEASE_TRAIN_BOM</name>
+					<defaultValue>https://github.com/spring-cloud/spring-cloud-release</defaultValue>
+					<description>Subfolder of the pom that contains the versions for the release train</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_META_RELEASE_GIT_ORG_URL</name>
+					<defaultValue>https://github.com/spring-cloud</defaultValue>
+					<description>URL of the organization from which projects can be cloned</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>RELEASER_POM_THIS_TRAIN</name>
+					<defaultValue>spring-cloud-dependencies/pom.xml</defaultValue>
+					<description>URL to a project containing a BOM. Defaults to Spring Cloud Release Git repository</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.BooleanParameterDefinition>
+					<name>RELEASER_SAGAN_UPDATE</name>
+					<defaultValue>false</defaultValue>
+					<description>If true then will update documentation repository with the current URL</description>
+				</hudson.model.BooleanParameterDefinition>
+				<hudson.model.BooleanParameterDefinition>
+					<name>RELEASER_POST_RELEASE_ONLY</name>
+					<defaultValue>false</defaultValue>
+					<description>If set to true will run only post release tasks</description>
+				</hudson.model.BooleanParameterDefinition>
+				<hudson.model.BooleanParameterDefinition>
+					<name>DRY_RUN</name>
+					<defaultValue>false</defaultValue>
+					<description>If true then will run meta-release in a dry run mode</description>
+				</hudson.model.BooleanParameterDefinition>
+			</parameterDefinitions>
+		</hudson.model.ParametersDefinitionProperty>
+	</properties>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H H * * *</spec>
+		</hudson.triggers.TimerTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				set -o errexit
+
+				echo "Logging to Dockerhub..."
+				docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
 				set -o errexit
 				echo "Running version check"
-VERSION=$( sed '\!&lt;parent!,\!&lt;/parent!d' `pwd`/pom.xml | grep '&lt;version' | head -1 | sed -e 's/.*&lt;version&gt;//' -e 's!&lt;/version&gt;.*$!!' )
-echo "The found version is [${VERSION}]"
+				VERSION=$( sed '\!&lt;parent!,\!&lt;/parent!d' `pwd`/pom.xml | grep '&lt;version' | head -1 | sed -e 's/.*&lt;version&gt;//' -e 's!&lt;/version&gt;.*$!!' )
+				echo "The found version is [${VERSION}]"
 
-if ! echo $VERSION | egrep -q 'SNAPSHOT'; then
-    echo "Version is NOT SNAPSHOT, will not do anything. Something is wrong!"
-    exit 1
-else
-	echo "Version is a SNAPSHOT one, will continue with the build"
-fi
+				if ! echo $VERSION | egrep -q 'SNAPSHOT'; then
+				echo "Version is NOT SNAPSHOT, will not do anything. Something is wrong!"
+				exit 1
+				else
+				echo "Version is a SNAPSHOT one, will continue with the build"
+				fi
 
-							currentDir="$(pwd)"
-			tmpDir="$(mktemp -d)"
-			trap "{ rm -rf ${tmpDir}; }" EXIT
-			echo "Cloning to [${tmpDir}] and building the releaser"
-			git clone -b "${RELEASER_BRANCH:-main}" --single-branch https://github.com/spring-cloud/spring-cloud-release-tools.git "${tmpDir}"
-			pushd "${tmpDir}"
+				currentDir="$(pwd)"
+				tmpDir="$(mktemp -d)"
+				trap "{ rm -rf ${tmpDir}; }" EXIT
+				echo "Cloning to [${tmpDir}] and building the releaser"
+				git clone -b "${RELEASER_BRANCH:-main}" --single-branch https://github.com/spring-cloud/spring-cloud-release-tools.git "${tmpDir}"
+				pushd "${tmpDir}"
 				rm -rf ~/.m2/repository/org/springframework/cloud
 				ROOT_VIEW="Spring%20Cloud"
 				CURRENT_VIEW="Releaser"
-				echo "Building the releaser. If the build fails after this then it means that the releaser failed to get built. Then please check the build's workspace under [.git/releaser.log] for logs. You can click here to see it [${JENKINS_URL}/view/${ROOT_VIEW}/view/${CURRENT_VIEW}/job/${JOB_NAME}/ws/.git/releaser.log]"
+				echo "Building the releaser. If the build fails after this then it means that the releaser failed to get built. Then please check the build's workspace under
+				[.git/releaser.log] for logs. You can click here to see it [${JENKINS_URL}/view/${ROOT_VIEW}/view/${CURRENT_VIEW}/job/${JOB_NAME}/ws/.git/releaser.log]"
 				./mvnw clean install -DskipTests -am -pl :spring-cloud &gt; "${currentDir}/.git/releaser.log"
-			popd
+				popd
 				releaserJarLocation="${tmpDir}/projects/spring-cloud/target/"
 				additionalParams=""
 				if [[ $RELEASE_VERSION != "" ]]; then
-					echo "Found the release version parameter. Will use the properties file to set the versions"
-								version=$( echo "$RELEASE_VERSION" | tr '[:upper:]' '[:lower:]' | tr '.' '_' )
-			configFile="${version}.properties"
-			configUrl="${RELEASER_CONFIG_URL}/${RELEASER_CONFIG_BRANCH}/${configFile}"
-			echo "Downloading the configuration properties file from [${configUrl}]"
-			rm -rf config &amp;&amp; mkdir -p ${releaserJarLocation} &amp;&amp; curl --fail "${configUrl}" -o ${releaserJarLocation}/application.properties
-			echo "Cause nobody remembers to set the releaser branch properly, I'll do it for you"
-			if [[ $version == *"hoxton"* ]]; then
+				echo "Found the release version parameter. Will use the properties file to set the versions"
+				version=$( echo "$RELEASE_VERSION" | tr '[:upper:]' '[:lower:]' | tr '.' '_' )
+				configFile="${version}.properties"
+				configUrl="${RELEASER_CONFIG_URL}/${RELEASER_CONFIG_BRANCH}/${configFile}"
+				echo "Downloading the configuration properties file from [${configUrl}]"
+				rm -rf config &amp;&amp; mkdir -p ${releaserJarLocation} &amp;&amp; curl --fail "${configUrl}" -o ${releaserJarLocation}/application.properties
+				echo "Cause nobody remembers to set the releaser branch properly, I'll do it for you"
+				if [[ $version == *"hoxton"* ]]; then
 				echo "You're using the Hoxton release train, I'm switching the releaser branch [$RELEASER_BRANCH] to [1.0.x] !"
 				RELEASER_BRANCH="1.0.x"
-			fi
-		
-					versions="--$( sed '{:q;N;s/\n/ --/g;t q}' ${releaserJarLocation}/application.properties )"
-					additionalParams="--releaser.git.fetch-versions-from-git=false ${versions}"
+				fi
+
+				versions="--$( sed '{:q;N;s/\n/ --/g;t q}' ${releaserJarLocation}/application.properties )"
+				additionalParams="--releaser.git.fetch-versions-from-git=false ${versions}"
 				fi
 				echo "Run the releaser against the project"
 				echo "Checking out branch"
 				git checkout main
 				echo "Releasing the project"
-				
-					set +x
-					git config user.name "spring-buildmaster"
-					git config user.email "buildmaster@springframework.org"
-					git config credential.helper "store --file=/tmp/gitcredentials"
-					echo "https://$GITHUB_REPO_USERNAME:$GITHUB_REPO_PASSWORD@github.com" &gt; /tmp/gitcredentials
-					export SPRING_CLOUD_STATIC_REPO="https://$GITHUB_REPO_USERNAME:$GITHUB_REPO_PASSWORD@github.com/spring-cloud/spring-cloud-static.git"
-					trap "{ rm -f /tmp/gitcredentials; }" EXIT
-					set -x
-				
-				
+
+				set +x
+				git config user.name "spring-buildmaster"
+				git config user.email "buildmaster@springframework.org"
+				git config credential.helper "store --file=/tmp/gitcredentials"
+				echo "https://$GITHUB_REPO_USERNAME:$GITHUB_REPO_PASSWORD@github.com" &gt; /tmp/gitcredentials
+				export SPRING_CLOUD_STATIC_REPO="https://$GITHUB_REPO_USERNAME:$GITHUB_REPO_PASSWORD@github.com/spring-cloud/spring-cloud-static.git"
+				trap "{ rm -f /tmp/gitcredentials; }" EXIT
+				set -x
+
+
 				set +x
 				SPRING_CLOUD_RELEASE_REPO="https://github.com/spring-cloud/spring-cloud-release.git"
-				SYSTEM_PROPS="-Dgpg.secretKeyring="$FOO_SEC" -Dgpg.publicKeyring="$FOO_PUB" -Dgpg.passphrase="$FOO_PASSPHRASE" -DSONATYPE_USER="$SONATYPE_USER" -DSONATYPE_PASSWORD="$SONATYPE_PASSWORD""
-				java ${RELEASER_ADDITIONAL_PROPS} -Dreleaser.git.username="$GITHUB_REPO_USERNAME" -Dreleaser.git.password="$GITHUB_REPO_PASSWORD" -jar ${releaserJarLocation}/spring-cloud*SNAPSHOT.jar --releaser.post-release-tasks-only=${RELEASER_POST_RELEASE_ONLY} --releaser.meta-release.release-train-project-name=${RELEASER_META_RELEASE_RELEASE_TRAIN_PROJECT_NAME} --releaser.git.release-train-bom-url=${RELEASER_GIT_RELEASE_TRAIN_BOM} --releaser.pom.this-train-bom=${RELEASER_POM_THIS_TRAIN} --releaser.pom.branch=${RELEASER_POM_BRANCH} --releaser.maven.wait-time-in-minutes=180 --releaser.maven.system-properties="${SYSTEM_PROPS}" --full-release --dry-run=${DRY_RUN} --releaser.sagan.update-sagan=${RELEASER_SAGAN_UPDATE} --interactive=false $additionalParams || exit 1
+				SYSTEM_PROPS="-Dgpg.secretKeyring="$FOO_SEC" -Dgpg.publicKeyring="$FOO_PUB" -Dgpg.passphrase="$FOO_PASSPHRASE" -DSONATYPE_USER="$SONATYPE_USER"
+				-DSONATYPE_PASSWORD="$SONATYPE_PASSWORD""
+				java ${RELEASER_ADDITIONAL_PROPS} -Dreleaser.git.username="$GITHUB_REPO_USERNAME" -Dreleaser.git.password="$GITHUB_REPO_PASSWORD" -jar
+				${releaserJarLocation}/spring-cloud*SNAPSHOT.jar --releaser.post-release-tasks-only=${RELEASER_POST_RELEASE_ONLY}
+				--releaser.meta-release.release-train-project-name=${RELEASER_META_RELEASE_RELEASE_TRAIN_PROJECT_NAME}
+				--releaser.git.release-train-bom-url=${RELEASER_GIT_RELEASE_TRAIN_BOM} --releaser.pom.this-train-bom=${RELEASER_POM_THIS_TRAIN}
+				--releaser.pom.branch=${RELEASER_POM_BRANCH} --releaser.maven.wait-time-in-minutes=180 --releaser.maven.system-properties="${SYSTEM_PROPS}" --full-release
+				--dry-run=${DRY_RUN} --releaser.sagan.update-sagan=${RELEASER_SAGAN_UPDATE} --interactive=false $additionalParams || exit 1
 				rm -rf /tmp/gitcredentials
-				</command>
-        </hudson.tasks.Shell>
-    </builders>
-    <publishers>
-        <jenkins.plugins.slack.SlackNotifier>
-            <startNotification>false</startNotification>
-            <notifySuccess>false</notifySuccess>
-            <notifyAborted>false</notifyAborted>
-            <notifyNotBuilt>false</notifyNotBuilt>
-            <notifyUnstable>true</notifyUnstable>
-            <notifyFailure>true</notifyFailure>
-            <notifyBackToNormal>false</notifyBackToNormal>
-            <notifyRepeatedFailure>true</notifyRepeatedFailure>
-            <notifyRegression>false</notifyRegression>
-            <includeTestSummary>true</includeTestSummary>
-            <includeFailedTests>true</includeFailedTests>
-            <showCommitList>true</showCommitList>
-            <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
-            <room>spring-cloud-firehose</room>
-        </jenkins.plugins.slack.SlackNotifier>
-        <hudson.tasks.junit.JUnitResultArchiver>
-            <testResults>**/surefire-reports/*.xml</testResults>
-            <keepLongStdio>false</keepLongStdio>
-            <testDataPublishers></testDataPublishers>
-            <allowEmptyResults>true</allowEmptyResults>
-            <healthScaleFactor>1.0</healthScaleFactor>
-        </hudson.tasks.junit.JUnitResultArchiver>
-        <hudson.tasks.ArtifactArchiver>
-            <artifacts>.git/*.log,target/*.txt,target/*.md,target/*.adoc</artifacts>
-            <allowEmptyArchive>true</allowEmptyArchive>
-            <defaultExcludes>true</defaultExcludes>
-            <fingerprint>false</fingerprint>
-            <onlyIfSuccessful>false</onlyIfSuccessful>
-        </hudson.tasks.ArtifactArchiver>
-        <hudson.plugins.textfinder.TextFinderPublisher>
-            <fileSet>**/build_status,build_status</fileSet>
-            <regexp>.*BUILD UNSTABLE.*</regexp>
-            <alsoCheckConsoleOutput>false</alsoCheckConsoleOutput>
-            <succeedIfFound>false</succeedIfFound>
-            <unstableIfFound>true</unstableIfFound>
-        </hudson.plugins.textfinder.TextFinderPublisher>
-    </publishers>
-    <buildWrappers>
-        <hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
-        <hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-            <colorMapName>xterm</colorMapName>
-        </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-        <com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper></com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
-        <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-            <bindings>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>hub.docker.com-springbuildmaster</credentialsId>
-                    <usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
-                    <passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>3a20bcaa-d8ad-48e3-901d-9fbc941376ee</credentialsId>
-                    <usernameVariable>GITHUB_REPO_USERNAME</usernameVariable>
-                    <passwordVariable>GITHUB_REPO_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.FileBinding>
-                    <variable>FOO_SEC</variable>
-                    <credentialsId>spring-signing-secring.gpg</credentialsId>
-                </org.jenkinsci.plugins.credentialsbinding.impl.FileBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.FileBinding>
-                    <variable>FOO_PUB</variable>
-                    <credentialsId>spring-signing-pubring.gpg</credentialsId>
-                </org.jenkinsci.plugins.credentialsbinding.impl.FileBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
-                    <variable>FOO_PASSPHRASE</variable>
-                    <credentialsId>spring-gpg-passphrase</credentialsId>
-                </org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
-                    <variable>RELEASER_GIT_OAUTH_TOKEN</variable>
-                    <credentialsId>7b3ebbea-7001-479b-8578-b8c464dab973</credentialsId>
-                </org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>oss-s01-token</credentialsId>
-                    <usernameVariable>SONATYPE_USER</usernameVariable>
-                    <passwordVariable>SONATYPE_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-            </bindings>
-        </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-        <hudson.plugins.build__timeout.BuildTimeoutWrapper>
-            <strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
-                <timeout>600000</timeout>
-            </strategy>
-            <operationList>
-                <hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
-                <hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-                    <description>Build failed due to timeout after {0} minutes of inactivity</description>
-                </hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-            </operationList>
-        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-    </buildWrappers>
-    <jdk>openjdk17</jdk>
-    <scm class='hudson.plugins.git.GitSCM'>
-        <userRemoteConfigs>
-            <hudson.plugins.git.UserRemoteConfig>
-                <url>https://github.com/spring-cloud/spring-cloud-circuitbreaker</url>
-                <credentialsId>3a20bcaa-d8ad-48e3-901d-9fbc941376ee</credentialsId>
-            </hudson.plugins.git.UserRemoteConfig>
-        </userRemoteConfigs>
-        <branches>
-            <hudson.plugins.git.BranchSpec>
-                <name>$BRANCH</name>
-            </hudson.plugins.git.BranchSpec>
-        </branches>
-        <configVersion>2</configVersion>
-        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <gitTool>Default</gitTool>
-        <extensions>
-            <hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
-            <hudson.plugins.git.extensions.impl.LocalBranch>
-                <localBranch>**</localBranch>
-            </hudson.plugins.git.extensions.impl.LocalBranch>
-        </extensions>
-    </scm>
+			</command>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers>
+		<jenkins.plugins.slack.SlackNotifier>
+			<startNotification>false</startNotification>
+			<notifySuccess>false</notifySuccess>
+			<notifyAborted>false</notifyAborted>
+			<notifyNotBuilt>false</notifyNotBuilt>
+			<notifyUnstable>true</notifyUnstable>
+			<notifyFailure>true</notifyFailure>
+			<notifyBackToNormal>false</notifyBackToNormal>
+			<notifyRepeatedFailure>true</notifyRepeatedFailure>
+			<notifyRegression>false</notifyRegression>
+			<includeTestSummary>true</includeTestSummary>
+			<includeFailedTests>true</includeFailedTests>
+			<showCommitList>true</showCommitList>
+			<commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+			<room>spring-cloud-firehose</room>
+		</jenkins.plugins.slack.SlackNotifier>
+		<hudson.tasks.junit.JUnitResultArchiver>
+			<testResults>**/surefire-reports/*.xml</testResults>
+			<keepLongStdio>false</keepLongStdio>
+			<testDataPublishers></testDataPublishers>
+			<allowEmptyResults>true</allowEmptyResults>
+			<healthScaleFactor>1.0</healthScaleFactor>
+		</hudson.tasks.junit.JUnitResultArchiver>
+		<hudson.tasks.ArtifactArchiver>
+			<artifacts>.git/*.log,target/*.txt,target/*.md,target/*.adoc</artifacts>
+			<allowEmptyArchive>true</allowEmptyArchive>
+			<defaultExcludes>true</defaultExcludes>
+			<fingerprint>false</fingerprint>
+			<onlyIfSuccessful>false</onlyIfSuccessful>
+		</hudson.tasks.ArtifactArchiver>
+		<hudson.plugins.textfinder.TextFinderPublisher>
+			<fileSet>**/build_status,build_status</fileSet>
+			<regexp>.*BUILD UNSTABLE.*</regexp>
+			<alsoCheckConsoleOutput>false</alsoCheckConsoleOutput>
+			<succeedIfFound>false</succeedIfFound>
+			<unstableIfFound>true</unstableIfFound>
+		</hudson.plugins.textfinder.TextFinderPublisher>
+	</publishers>
+	<buildWrappers>
+		<hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
+		<hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+			<colorMapName>xterm</colorMapName>
+		</hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+		<com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper></com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
+		<org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+			<bindings>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>hub.docker.com-springbuildmaster</credentialsId>
+					<usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
+					<passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>3a20bcaa-d8ad-48e3-901d-9fbc941376ee</credentialsId>
+					<usernameVariable>GITHUB_REPO_USERNAME</usernameVariable>
+					<passwordVariable>GITHUB_REPO_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.FileBinding>
+					<variable>FOO_SEC</variable>
+					<credentialsId>spring-signing-secring.gpg</credentialsId>
+				</org.jenkinsci.plugins.credentialsbinding.impl.FileBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.FileBinding>
+					<variable>FOO_PUB</variable>
+					<credentialsId>spring-signing-pubring.gpg</credentialsId>
+				</org.jenkinsci.plugins.credentialsbinding.impl.FileBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
+					<variable>FOO_PASSPHRASE</variable>
+					<credentialsId>spring-gpg-passphrase</credentialsId>
+				</org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
+					<variable>RELEASER_GIT_OAUTH_TOKEN</variable>
+					<credentialsId>7b3ebbea-7001-479b-8578-b8c464dab973</credentialsId>
+				</org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>oss-s01-token</credentialsId>
+					<usernameVariable>SONATYPE_USER</usernameVariable>
+					<passwordVariable>SONATYPE_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+			</bindings>
+		</org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+		<hudson.plugins.build__timeout.BuildTimeoutWrapper>
+			<strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
+				<timeout>600000</timeout>
+			</strategy>
+			<operationList>
+				<hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
+				<hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+					<description>Build failed due to timeout after {0} minutes of inactivity</description>
+				</hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+			</operationList>
+		</hudson.plugins.build__timeout.BuildTimeoutWrapper>
+	</buildWrappers>
+	<jdk>openjdk17</jdk>
+	<scm class='hudson.plugins.git.GitSCM'>
+		<userRemoteConfigs>
+			<hudson.plugins.git.UserRemoteConfig>
+				<url>https://github.com/spring-cloud/spring-cloud-circuitbreaker</url>
+				<credentialsId>3a20bcaa-d8ad-48e3-901d-9fbc941376ee</credentialsId>
+			</hudson.plugins.git.UserRemoteConfig>
+		</userRemoteConfigs>
+		<branches>
+			<hudson.plugins.git.BranchSpec>
+				<name>$BRANCH</name>
+			</hudson.plugins.git.BranchSpec>
+		</branches>
+		<configVersion>2</configVersion>
+		<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+		<gitTool>Default</gitTool>
+		<extensions>
+			<hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
+			<hudson.plugins.git.extensions.impl.LocalBranch>
+				<localBranch>**</localBranch>
+			</hudson.plugins.git.extensions.impl.LocalBranch>
+		</extensions>
+	</scm>
 </project>

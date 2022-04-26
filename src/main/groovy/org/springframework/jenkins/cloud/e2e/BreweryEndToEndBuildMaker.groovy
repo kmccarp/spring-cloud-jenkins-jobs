@@ -13,8 +13,8 @@ class BreweryEndToEndBuildMaker extends EndToEndBuildMaker {
 	private final String repoName = 'brewery'
 
 	private static final Map<String, String> RELEASE_TRAIN_TO_PROJECT_BRANCH = [
-			"2021.0"   : "2021.0.x",
-			"2020.0"   : "2020.0.x",
+			"2021.0": "2021.0.x",
+			"2020.0": "2020.0.x",
 	]
 
 	BreweryEndToEndBuildMaker(DslFactory dsl) {

@@ -1,15 +1,14 @@
 package org.springframework.jenkins.cloud.release
 
-
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.helpers.wrapper.CredentialsBindingContext
 import javaposse.jobdsl.dsl.jobs.FreeStyleJob
 
 import org.springframework.jenkins.cloud.common.Releaser
 import org.springframework.jenkins.cloud.common.SpringCloudJobs
-import org.springframework.jenkins.cloud.common.SpringCloudNotification
 import org.springframework.jenkins.common.job.JdkConfig
 import org.springframework.jenkins.common.job.TestPublisher
+
 /**
  * @author Marcin Grzejszczak
  */
@@ -22,8 +21,8 @@ class SpringCloudMetaReleaseMaker implements JdkConfig, TestPublisher,
 	protected static final String START_FROM_PARAM = "START_FROM"
 	protected static final String TASK_NAMES_PARAM = "TASK_NAMES"
 	protected static final String DRY_RUN_PARAM = "DRY_RUN"
-	protected static final String RELEASER_POM_THIS_TRAIN_BOM= 'RELEASER_POM_THIS_TRAIN'
-	protected static final String RELEASER_SAGAN_UPDATE_VAR= 'RELEASER_SAGAN_UPDATE'
+	protected static final String RELEASER_POM_THIS_TRAIN_BOM = 'RELEASER_POM_THIS_TRAIN'
+	protected static final String RELEASER_SAGAN_UPDATE_VAR = 'RELEASER_SAGAN_UPDATE'
 	protected static final String RELEASER_GIT_UPDATE_DOCUMENTATION_REPOS_VAR = 'RELEASER_GIT_UPDATE_DOCUMENTATION_REPOS'
 	protected static final String RELEASER_GIT_UPDATE_SPRING_PROJECTS_VAR = 'RELEASER_GIT_UPDATE_SPRING_PROJECTS'
 	protected static final String RELEASER_GIT_UPDATE_RELEASE_TRAIN_WIKI_VAR = 'RELEASER_GIT_UPDATE_RELEASE_TRAIN_WIKI'
@@ -36,7 +35,7 @@ class SpringCloudMetaReleaseMaker implements JdkConfig, TestPublisher,
 	protected static final String RELEASER_RELEASE_TRAIN_PROJECT_NAME_VAR = 'RELEASER_META_RELEASE_RELEASE_TRAIN_PROJECT_NAME'
 	protected static final String RELEASER_META_RELEASE_GIT_ORG_URL_VAR = "RELEASER_META_RELEASE_GIT_ORG_URL"
 	protected static final String RELEASER_RELEASE_TRAIN_DEPENDENCY_NAMES_VAR = 'RELEASER_META_RELEASE_RELEASE_TRAIN_DEPENDENCY_NAMES'
-	protected static final String RELEASER_GIT_RELEASE_TRAIN_BOM_URL_VAR= 'RELEASER_GIT_RELEASE_TRAIN_BOM'
+	protected static final String RELEASER_GIT_RELEASE_TRAIN_BOM_URL_VAR = 'RELEASER_GIT_RELEASE_TRAIN_BOM'
 	protected static final String RELEASER_PROJECTS_TO_SKIP_VAR = 'RELEASER_PROJECTS_TO_SKIP'
 	protected static final String RELEASER_POST_RELEASE_ONLY_VAR = 'RELEASER_POST_RELEASE_ONLY'
 

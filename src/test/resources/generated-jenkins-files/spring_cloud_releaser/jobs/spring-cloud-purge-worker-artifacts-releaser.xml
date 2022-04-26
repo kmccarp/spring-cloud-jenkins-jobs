@@ -1,60 +1,60 @@
 <project>
-    <actions></actions>
-    <description></description>
-    <keepDependencies>false</keepDependencies>
-    <properties></properties>
-    <scm class='hudson.scm.NullSCM'></scm>
-    <canRoam>false</canRoam>
-    <disabled>false</disabled>
-    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers></triggers>
-    <concurrentBuild>false</concurrentBuild>
-    <builders>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
+	<actions></actions>
+	<description></description>
+	<keepDependencies>false</keepDependencies>
+	<properties></properties>
+	<scm class='hudson.scm.NullSCM'></scm>
+	<canRoam>false</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers></triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
 				set -o errexit
 				artifactsFolder="~/.m2/repository/org/springframework/cloud/"
 				echo "Purging the [${artifactsFolder}] folder"
 				rm -rf "${artifactsFolder}"
-				</command>
-        </hudson.tasks.Shell>
-    </builders>
-    <publishers>
-        <jenkins.plugins.slack.SlackNotifier>
-            <startNotification>false</startNotification>
-            <notifySuccess>false</notifySuccess>
-            <notifyAborted>false</notifyAborted>
-            <notifyNotBuilt>false</notifyNotBuilt>
-            <notifyUnstable>true</notifyUnstable>
-            <notifyFailure>true</notifyFailure>
-            <notifyBackToNormal>false</notifyBackToNormal>
-            <notifyRepeatedFailure>true</notifyRepeatedFailure>
-            <notifyRegression>false</notifyRegression>
-            <includeTestSummary>true</includeTestSummary>
-            <includeFailedTests>true</includeFailedTests>
-            <showCommitList>true</showCommitList>
-            <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
-            <room>spring-cloud-firehose</room>
-        </jenkins.plugins.slack.SlackNotifier>
-    </publishers>
-    <buildWrappers>
-        <hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
-        <hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-            <colorMapName>xterm</colorMapName>
-        </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-        <com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper></com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
-        <hudson.plugins.build__timeout.BuildTimeoutWrapper>
-            <strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
-                <timeout>600000</timeout>
-            </strategy>
-            <operationList>
-                <hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
-                <hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-                    <description>Build failed due to timeout after {0} minutes of inactivity</description>
-                </hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-            </operationList>
-        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-    </buildWrappers>
-    <assignedNode>releaser</assignedNode>
+			</command>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers>
+		<jenkins.plugins.slack.SlackNotifier>
+			<startNotification>false</startNotification>
+			<notifySuccess>false</notifySuccess>
+			<notifyAborted>false</notifyAborted>
+			<notifyNotBuilt>false</notifyNotBuilt>
+			<notifyUnstable>true</notifyUnstable>
+			<notifyFailure>true</notifyFailure>
+			<notifyBackToNormal>false</notifyBackToNormal>
+			<notifyRepeatedFailure>true</notifyRepeatedFailure>
+			<notifyRegression>false</notifyRegression>
+			<includeTestSummary>true</includeTestSummary>
+			<includeFailedTests>true</includeFailedTests>
+			<showCommitList>true</showCommitList>
+			<commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+			<room>spring-cloud-firehose</room>
+		</jenkins.plugins.slack.SlackNotifier>
+	</publishers>
+	<buildWrappers>
+		<hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
+		<hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+			<colorMapName>xterm</colorMapName>
+		</hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+		<com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper></com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
+		<hudson.plugins.build__timeout.BuildTimeoutWrapper>
+			<strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
+				<timeout>600000</timeout>
+			</strategy>
+			<operationList>
+				<hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
+				<hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+					<description>Build failed due to timeout after {0} minutes of inactivity</description>
+				</hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+			</operationList>
+		</hudson.plugins.build__timeout.BuildTimeoutWrapper>
+	</buildWrappers>
+	<assignedNode>releaser</assignedNode>
 </project>

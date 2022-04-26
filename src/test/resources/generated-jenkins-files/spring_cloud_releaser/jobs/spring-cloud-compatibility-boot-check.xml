@@ -1,201 +1,201 @@
 <com.tikal.jenkins.plugins.multijob.MultiJobProject>
-    <actions></actions>
-    <description></description>
-    <keepDependencies>false</keepDependencies>
-    <properties>
-        <hudson.model.ParametersDefinitionProperty>
-            <parameterDefinitions>
-                <hudson.model.StringParameterDefinition>
-                    <name>SPRING_BOOT_VERSION</name>
-                    <defaultValue></defaultValue>
-                    <description>Which version of Spring Boot should be used for the build</description>
-                </hudson.model.StringParameterDefinition>
-                <hudson.model.StringParameterDefinition>
-                    <name>SPRING_CLOUD_BUILD_BRANCH</name>
-                    <defaultValue>main</defaultValue>
-                    <description>Which branch of Spring Cloud Build should be cloned</description>
-                </hudson.model.StringParameterDefinition>
-            </parameterDefinitions>
-        </hudson.model.ParametersDefinitionProperty>
-    </properties>
-    <scm class='hudson.scm.NullSCM'></scm>
-    <canRoam>true</canRoam>
-    <disabled>false</disabled>
-    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers></triggers>
-    <concurrentBuild>false</concurrentBuild>
-    <builders>
-        <com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
-            <phaseName>spring-boot-compatibility-phase</phaseName>
-            <continuationCondition>SUCCESSFUL</continuationCondition>
-            <executionType>PARALLEL</executionType>
-            <phaseJobs>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-netflix-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-zookeeper-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-consul-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-bus-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-commons-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-config-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-cloudfoundry-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-build-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-contract-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-vault-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-gateway-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-openfeign-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-function-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-kubernetes-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-circuitbreaker-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-release-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-task-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-                    <jobName>spring-cloud-tests-compatibility-boot-check</jobName>
-                    <currParams>true</currParams>
-                    <exposedSCM>true</exposedSCM>
-                    <disableJob>false</disableJob>
-                    <killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
-                    <abortAllJob>false</abortAllJob>
-                    <configs class='java.util.Collections$EmptyList'></configs>
-                </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
-            </phaseJobs>
-        </com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
-    </builders>
-    <publishers></publishers>
-    <buildWrappers></buildWrappers>
+	<actions></actions>
+	<description></description>
+	<keepDependencies>false</keepDependencies>
+	<properties>
+		<hudson.model.ParametersDefinitionProperty>
+			<parameterDefinitions>
+				<hudson.model.StringParameterDefinition>
+					<name>SPRING_BOOT_VERSION</name>
+					<defaultValue></defaultValue>
+					<description>Which version of Spring Boot should be used for the build</description>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>SPRING_CLOUD_BUILD_BRANCH</name>
+					<defaultValue>main</defaultValue>
+					<description>Which branch of Spring Cloud Build should be cloned</description>
+				</hudson.model.StringParameterDefinition>
+			</parameterDefinitions>
+		</hudson.model.ParametersDefinitionProperty>
+	</properties>
+	<scm class='hudson.scm.NullSCM'></scm>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers></triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
+			<phaseName>spring-boot-compatibility-phase</phaseName>
+			<continuationCondition>SUCCESSFUL</continuationCondition>
+			<executionType>PARALLEL</executionType>
+			<phaseJobs>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-netflix-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-zookeeper-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-consul-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-bus-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-commons-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-config-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-cloudfoundry-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-build-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-contract-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-vault-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-gateway-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-openfeign-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-function-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-kubernetes-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-circuitbreaker-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-release-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-task-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+				<com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+					<jobName>spring-cloud-tests-compatibility-boot-check</jobName>
+					<currParams>true</currParams>
+					<exposedSCM>true</exposedSCM>
+					<disableJob>false</disableJob>
+					<killPhaseOnJobResultCondition>FAILURE</killPhaseOnJobResultCondition>
+					<abortAllJob>false</abortAllJob>
+					<configs class='java.util.Collections$EmptyList'></configs>
+				</com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+			</phaseJobs>
+		</com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
+	</builders>
+	<publishers></publishers>
+	<buildWrappers></buildWrappers>
 </com.tikal.jenkins.plugins.multijob.MultiJobProject>

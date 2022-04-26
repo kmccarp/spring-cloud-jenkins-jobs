@@ -1,5 +1,7 @@
 package org.springframework.jenkins.cloud.util
 
+import java.nio.file.Paths
+
 import groovy.xml.XmlUtil
 import org.custommonkey.xmlunit.DetailedDiff
 import org.custommonkey.xmlunit.Diff
@@ -7,8 +9,6 @@ import org.custommonkey.xmlunit.ElementNameAndAttributeQualifier
 import org.custommonkey.xmlunit.XMLUnit
 import org.junit.Before
 import org.junit.ComparisonFailure
-
-import java.nio.file.Paths
 
 trait XmlComparator {
 

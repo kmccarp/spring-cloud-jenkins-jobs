@@ -1,7 +1,8 @@
 package org.springframework.jenkins.cloud.e2e
 
-import org.springframework.jenkins.cloud.common.SpringCloudJobs
 import javaposse.jobdsl.dsl.DslFactory
+
+import org.springframework.jenkins.cloud.common.SpringCloudJobs
 import org.springframework.jenkins.cloud.common.SpringCloudNotification
 import org.springframework.jenkins.common.job.Cron
 import org.springframework.jenkins.common.job.JdkConfig
@@ -62,8 +63,8 @@ class EndToEndBuildMaker implements TestPublisher,
 				timestamps()
 				colorizeOutput()
 				environmentVariables([
-						TERM: 'dumb',
-						RETRIES: 70,
+						TERM         : 'dumb',
+						RETRIES      : 70,
 						WAVEFRONT_URI: "https://demo.wavefront.com"
 				])
 				timeout {

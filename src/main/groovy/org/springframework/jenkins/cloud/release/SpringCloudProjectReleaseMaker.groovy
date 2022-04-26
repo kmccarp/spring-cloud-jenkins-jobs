@@ -1,6 +1,7 @@
 package org.springframework.jenkins.cloud.release
 
 import javaposse.jobdsl.dsl.DslFactory
+
 import org.springframework.jenkins.cloud.common.Project
 import org.springframework.jenkins.cloud.common.ReleaseTrain
 
@@ -14,7 +15,7 @@ class SpringCloudProjectReleaseMaker extends SpringCloudReleaseMaker {
 	private final Project project
 	private String branch
 
-    SpringCloudProjectReleaseMaker(DslFactory dsl, ReleaseTrain train, Project project) {
+	SpringCloudProjectReleaseMaker(DslFactory dsl, ReleaseTrain train, Project project) {
 		super(dsl, project.org)
 		this.train = train
 		this.project = project

@@ -1,53 +1,56 @@
 <project>
-    <actions></actions>
-    <description></description>
-    <keepDependencies>false</keepDependencies>
-    <properties>
-        <EnvInjectJobProperty>
-            <info>
-                <propertiesContent>TERM=dumb
-RETRIES=70
-WAVEFRONT_URI=https://demo.wavefront.com</propertiesContent>
-                <loadFilesFromMaster>false</loadFilesFromMaster>
-            </info>
-            <on>true</on>
-            <keepJenkinsSystemVariables>true</keepJenkinsSystemVariables>
-            <keepBuildVariables>true</keepBuildVariables>
-            <overrideBuildParameters>false</overrideBuildParameters>
-            <contributors></contributors>
-        </EnvInjectJobProperty>
-        <hudson.plugins.heavy__job.HeavyJobProperty>
-            <weight>1</weight>
-        </hudson.plugins.heavy__job.HeavyJobProperty>
-    </properties>
-    <canRoam>false</canRoam>
-    <disabled>false</disabled>
-    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <triggers>
-        <hudson.triggers.TimerTrigger>
-            <spec>H H * * *</spec>
-        </hudson.triggers.TimerTrigger>
-    </triggers>
-    <concurrentBuild>false</concurrentBuild>
-    <builders>
-        <hudson.tasks.Shell>
-            <command>		#!/bin/bash
-		set -o errexit
-		
-		echo "Logging to Dockerhub..."
-		docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
-		</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
-if [ -n "$(type -t timeout)" ]; then timeout 10s docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {} || echo "Failed to stop docker... Hopefully you know what you're doing"; fi
-if [ -n "$(type gtimeout)" ]; then gtimeout 10s docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {} || echo "Failed to stop docker... Hopefully you know what you're doing"; fi
-</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
-			function kill_all_apps() {
+	<actions></actions>
+	<description></description>
+	<keepDependencies>false</keepDependencies>
+	<properties>
+		<EnvInjectJobProperty>
+			<info>
+				<propertiesContent>TERM=dumb
+					RETRIES=70
+					WAVEFRONT_URI=https://demo.wavefront.com
+				</propertiesContent>
+				<loadFilesFromMaster>false</loadFilesFromMaster>
+			</info>
+			<on>true</on>
+			<keepJenkinsSystemVariables>true</keepJenkinsSystemVariables>
+			<keepBuildVariables>true</keepBuildVariables>
+			<overrideBuildParameters>false</overrideBuildParameters>
+			<contributors></contributors>
+		</EnvInjectJobProperty>
+		<hudson.plugins.heavy__job.HeavyJobProperty>
+			<weight>1</weight>
+		</hudson.plugins.heavy__job.HeavyJobProperty>
+	</properties>
+	<canRoam>false</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H H * * *</spec>
+		</hudson.triggers.TimerTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				set -o errexit
+
+				echo "Logging to Dockerhub..."
+				docker login -p "$DOCKER_HUB_PASSWORD" -u "$DOCKER_HUB_USERNAME"
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				if [ -n "$(type -t timeout)" ]; then timeout 10s docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {} || echo "Failed to stop docker... Hopefully you know what
+				you're doing"; fi
+				if [ -n "$(type gtimeout)" ]; then gtimeout 10s docker ps -a -q | xargs -n 1 -P 8 -I {} docker stop {} || echo "Failed to stop docker... Hopefully you know what
+				you're doing"; fi
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				function kill_all_apps() {
 				kill_app_with_port 9991
 				kill_app_with_port 9992
 				kill_app_with_port 9993
@@ -64,141 +67,142 @@ if [ -n "$(type gtimeout)" ]; then gtimeout 10s docker ps -a -q | xargs -n 1 -P 
 				kill_app_with_port 2181
 				docker --tlsverify=false stop $(docker --tlsverify=false ps -a -q) || echo "No docker containers where active"
 				docker --tlsverify=false kill $(docker --tlsverify=false ps -a -q) || echo "Nothing to kill"
-				#docker --tlsverify=false rm $(docker --tlsverify=false ps -a -q) 
+				#docker --tlsverify=false rm $(docker --tlsverify=false ps -a -q)
 				#docker --tlsverify=false rmi $(docker --tlsverify=false images -q) -f
 				#docker volume ls -qf dangling=true | xargs -r docker volume rm
 				#docker volume rm $(docker volume ls -qf dangling=true)
 				pkill -f zookeeper || echo "No zookeeper process was running"
 				pkill -f kafka || echo "No kafka process was running"
-			}
+				}
 
-			# port is $1
-			function kill_app_with_port() {
+				# port is $1
+				function kill_app_with_port() {
 				kill -9 $(lsof -t -i:$1) &amp;&amp; echo "Killed an app running on port [$1]" || echo "No app running on port [$1]"
-			}
+				}
 
-			kill_all_apps
-		</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
-					echo "Cleaning up .m2"
-					rm -rf ~/.m2/repository/org/springframework/cloud/
-					echo "Clearing Gradle caches" 
-					rm -rf ~/.gradle/caches/modules-2/files-2.1/ 
-				</command>
-        </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-            <command>#!/bin/bash
-						
-		function bootVersion {
-			local bootVersion="${1}"
-			curl --silent https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | grep "&lt;version&gt;${bootVersion}." | grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp' | xargs
-		}
+				kill_all_apps
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
+				echo "Cleaning up .m2"
+				rm -rf ~/.m2/repository/org/springframework/cloud/
+				echo "Clearing Gradle caches"
+				rm -rf ~/.gradle/caches/modules-2/files-2.1/
+			</command>
+		</hudson.tasks.Shell>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
 
-			
-						
-		function springCloudVersion {
-			local cloudVersion="${1}"
-			curl --silent https://repo.spring.io/libs-snapshot-local/org/springframework/cloud/spring-cloud-starter-build/maven-metadata.xml | grep "&lt;version&gt;${cloudVersion}." | grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp' | xargs
-		}
+				function bootVersion {
+				local bootVersion="${1}"
+				curl --silent https://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-starter/maven-metadata.xml | grep "&lt;version&gt;${bootVersion}." |
+				grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp' | xargs
+				}
 
-						
-						./runAcceptanceTests.sh -t EUREKA --killattheend -v "$( springCloudVersion "2022.0" )" --branch main -r -b "$( bootVersion "3.0" )"
-					</command>
-        </hudson.tasks.Shell>
-    </builders>
-    <publishers>
-        <jenkins.plugins.slack.SlackNotifier>
-            <startNotification>false</startNotification>
-            <notifySuccess>false</notifySuccess>
-            <notifyAborted>false</notifyAborted>
-            <notifyNotBuilt>false</notifyNotBuilt>
-            <notifyUnstable>true</notifyUnstable>
-            <notifyFailure>false</notifyFailure>
-            <notifyBackToNormal>false</notifyBackToNormal>
-            <notifyRepeatedFailure>true</notifyRepeatedFailure>
-            <notifyRegression>false</notifyRegression>
-            <includeTestSummary>true</includeTestSummary>
-            <includeFailedTests>true</includeFailedTests>
-            <showCommitList>true</showCommitList>
-            <commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
-            <room>spring-cloud-firehose</room>
-        </jenkins.plugins.slack.SlackNotifier>
-        <hudson.tasks.junit.JUnitResultArchiver>
-            <testResults>**/test-results/**/*.xml</testResults>
-            <keepLongStdio>false</keepLongStdio>
-            <testDataPublishers></testDataPublishers>
-            <allowEmptyResults>false</allowEmptyResults>
-            <healthScaleFactor>1.0</healthScaleFactor>
-        </hudson.tasks.junit.JUnitResultArchiver>
-        <hudson.tasks.ArtifactArchiver>
-            <artifacts>**/acceptance-tests/build/reports/tests/**/*.*</artifacts>
-            <allowEmptyArchive>true</allowEmptyArchive>
-            <defaultExcludes>true</defaultExcludes>
-            <fingerprint>false</fingerprint>
-            <onlyIfSuccessful>false</onlyIfSuccessful>
-        </hudson.tasks.ArtifactArchiver>
-        <hudson.tasks.ArtifactArchiver>
-            <artifacts>**/acceptance-tests/build/spock-reports/**/*</artifacts>
-            <allowEmptyArchive>true</allowEmptyArchive>
-            <defaultExcludes>true</defaultExcludes>
-            <fingerprint>false</fingerprint>
-            <onlyIfSuccessful>false</onlyIfSuccessful>
-        </hudson.tasks.ArtifactArchiver>
-    </publishers>
-    <buildWrappers>
-        <hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
-        <hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-            <colorMapName>xterm</colorMapName>
-        </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-        <hudson.plugins.build__timeout.BuildTimeoutWrapper>
-            <strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
-                <timeout>1800000</timeout>
-            </strategy>
-            <operationList>
-                <hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
-                <hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-                    <description>Build failed due to timeout after {0} minutes of inactivity</description>
-                </hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
-            </operationList>
-        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-        <com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper></com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
-        <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-            <bindings>
-                <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                    <credentialsId>hub.docker.com-springbuildmaster</credentialsId>
-                    <usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
-                    <passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
-                </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-                <org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
-                    <variable>WAVEFRONT_API_TOKEN</variable>
-                    <credentialsId>brewery-wavefront-token</credentialsId>
-                </org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
-            </bindings>
-        </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
-    </buildWrappers>
-    <jdk>jdk11</jdk>
-    <assignedNode>ubuntu1804</assignedNode>
-    <scm class='hudson.plugins.git.GitSCM'>
-        <userRemoteConfigs>
-            <hudson.plugins.git.UserRemoteConfig>
-                <url>https://github.com/spring-cloud-samples/brewery</url>
-            </hudson.plugins.git.UserRemoteConfig>
-        </userRemoteConfigs>
-        <branches>
-            <hudson.plugins.git.BranchSpec>
-                <name>main</name>
-            </hudson.plugins.git.BranchSpec>
-        </branches>
-        <configVersion>2</configVersion>
-        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <gitTool>Default</gitTool>
-        <extensions>
-            <hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
-            <hudson.plugins.git.extensions.impl.LocalBranch>
-                <localBranch>**</localBranch>
-            </hudson.plugins.git.extensions.impl.LocalBranch>
-        </extensions>
-    </scm>
+
+				function springCloudVersion {
+				local cloudVersion="${1}"
+				curl --silent https://repo.spring.io/libs-snapshot-local/org/springframework/cloud/spring-cloud-starter-build/maven-metadata.xml | grep "&lt;version&gt;${cloudVersion}."
+				| grep "SNAPSHOT" | tail -1 | sed -ne '/&lt;version&gt;/s#\s*&lt;[^&gt;]*&gt;\s*##gp' | xargs
+				}
+
+
+				./runAcceptanceTests.sh -t EUREKA --killattheend -v "$( springCloudVersion "2022.0" )" --branch main -r -b "$( bootVersion "3.0" )"
+			</command>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers>
+		<jenkins.plugins.slack.SlackNotifier>
+			<startNotification>false</startNotification>
+			<notifySuccess>false</notifySuccess>
+			<notifyAborted>false</notifyAborted>
+			<notifyNotBuilt>false</notifyNotBuilt>
+			<notifyUnstable>true</notifyUnstable>
+			<notifyFailure>false</notifyFailure>
+			<notifyBackToNormal>false</notifyBackToNormal>
+			<notifyRepeatedFailure>true</notifyRepeatedFailure>
+			<notifyRegression>false</notifyRegression>
+			<includeTestSummary>true</includeTestSummary>
+			<includeFailedTests>true</includeFailedTests>
+			<showCommitList>true</showCommitList>
+			<commitInfoChoice>AUTHORS_AND_TITLES</commitInfoChoice>
+			<room>spring-cloud-firehose</room>
+		</jenkins.plugins.slack.SlackNotifier>
+		<hudson.tasks.junit.JUnitResultArchiver>
+			<testResults>**/test-results/**/*.xml</testResults>
+			<keepLongStdio>false</keepLongStdio>
+			<testDataPublishers></testDataPublishers>
+			<allowEmptyResults>false</allowEmptyResults>
+			<healthScaleFactor>1.0</healthScaleFactor>
+		</hudson.tasks.junit.JUnitResultArchiver>
+		<hudson.tasks.ArtifactArchiver>
+			<artifacts>**/acceptance-tests/build/reports/tests/**/*.*</artifacts>
+			<allowEmptyArchive>true</allowEmptyArchive>
+			<defaultExcludes>true</defaultExcludes>
+			<fingerprint>false</fingerprint>
+			<onlyIfSuccessful>false</onlyIfSuccessful>
+		</hudson.tasks.ArtifactArchiver>
+		<hudson.tasks.ArtifactArchiver>
+			<artifacts>**/acceptance-tests/build/spock-reports/**/*</artifacts>
+			<allowEmptyArchive>true</allowEmptyArchive>
+			<defaultExcludes>true</defaultExcludes>
+			<fingerprint>false</fingerprint>
+			<onlyIfSuccessful>false</onlyIfSuccessful>
+		</hudson.tasks.ArtifactArchiver>
+	</publishers>
+	<buildWrappers>
+		<hudson.plugins.timestamper.TimestamperBuildWrapper></hudson.plugins.timestamper.TimestamperBuildWrapper>
+		<hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+			<colorMapName>xterm</colorMapName>
+		</hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+		<hudson.plugins.build__timeout.BuildTimeoutWrapper>
+			<strategy class='hudson.plugins.build_timeout.impl.NoActivityTimeOutStrategy'>
+				<timeout>1800000</timeout>
+			</strategy>
+			<operationList>
+				<hudson.plugins.build__timeout.operations.FailOperation></hudson.plugins.build__timeout.operations.FailOperation>
+				<hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+					<description>Build failed due to timeout after {0} minutes of inactivity</description>
+				</hudson.plugins.build__timeout.operations.WriteDescriptionOperation>
+			</operationList>
+		</hudson.plugins.build__timeout.BuildTimeoutWrapper>
+		<com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper></com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
+		<org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+			<bindings>
+				<org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+					<credentialsId>hub.docker.com-springbuildmaster</credentialsId>
+					<usernameVariable>DOCKER_HUB_USERNAME</usernameVariable>
+					<passwordVariable>DOCKER_HUB_PASSWORD</passwordVariable>
+				</org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
+				<org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
+					<variable>WAVEFRONT_API_TOKEN</variable>
+					<credentialsId>brewery-wavefront-token</credentialsId>
+				</org.jenkinsci.plugins.credentialsbinding.impl.StringBinding>
+			</bindings>
+		</org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+	</buildWrappers>
+	<jdk>jdk11</jdk>
+	<assignedNode>ubuntu1804</assignedNode>
+	<scm class='hudson.plugins.git.GitSCM'>
+		<userRemoteConfigs>
+			<hudson.plugins.git.UserRemoteConfig>
+				<url>https://github.com/spring-cloud-samples/brewery</url>
+			</hudson.plugins.git.UserRemoteConfig>
+		</userRemoteConfigs>
+		<branches>
+			<hudson.plugins.git.BranchSpec>
+				<name>main</name>
+			</hudson.plugins.git.BranchSpec>
+		</branches>
+		<configVersion>2</configVersion>
+		<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+		<gitTool>Default</gitTool>
+		<extensions>
+			<hudson.plugins.git.extensions.impl.WipeWorkspace></hudson.plugins.git.extensions.impl.WipeWorkspace>
+			<hudson.plugins.git.extensions.impl.LocalBranch>
+				<localBranch>**</localBranch>
+			</hudson.plugins.git.extensions.impl.LocalBranch>
+		</extensions>
+	</scm>
 </project>

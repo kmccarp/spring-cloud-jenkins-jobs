@@ -8,7 +8,7 @@ package org.springframework.jenkins.common.job
 trait BuildAndDeploy {
 
 	String prefixJob(String projectName) {
-		if (projectName == projectSuffix()){
+		if (projectName == projectSuffix()) {
 			return projectName
 		}
 		return projectName.startsWith(projectSuffix()) ? projectName : "${projectSuffix()}-${projectName}"

@@ -9,9 +9,13 @@ import groovy.transform.ToString
 @ToString
 class Project {
 
-	enum BuildSystem { MAVEN, GRADLE, BOTH }
+	enum BuildSystem {
+		MAVEN, GRADLE, BOTH
+	}
 
-	enum ReleaseType { SNAPSHOT, RELEASE, BOTH, NONE }
+	enum ReleaseType {
+		SNAPSHOT, RELEASE, BOTH, NONE
+	}
 
 	// repo spring-cloud-build
 	String repo;
@@ -49,23 +53,25 @@ class Project {
 	}
 
 	// custom build stuff (branch param, jdk param)
-		// see CustomJob
+	// see CustomJob
 	List<String> customBuildCommand(BuildContext context) {
 		return null;
 	}
+
 	String labelExpression(BuildContext context) {
 		return null;
 	}
+
 	boolean publishTests(BuildContext context) {
 		return hasTests
 	}
 
 	static void verify(Project project, BuildContext buildContext) {
-		assert project.org?.trim() : "Project org is required"
-		assert project.repo?.trim() : "Project repo is required"
-		assert project.buildSystem : "Project buildSystgem is required"
-		assert buildContext.jdk?.trim() : "Project jdk is required"
-		assert buildContext.branch?.trim() : "Project branch is required"
+		assert project.org?.trim(): "Project org is required"
+		assert project.repo?.trim(): "Project repo is required"
+		assert project.buildSystem: "Project buildSystgem is required"
+		assert buildContext.jdk?.trim(): "Project jdk is required"
+		assert buildContext.branch?.trim(): "Project branch is required"
 	}
 
 	/**

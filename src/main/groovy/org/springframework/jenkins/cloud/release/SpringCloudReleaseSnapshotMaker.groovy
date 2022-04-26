@@ -2,6 +2,7 @@ package org.springframework.jenkins.cloud.release
 
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.jobs.FreeStyleJob
+
 import org.springframework.jenkins.cloud.common.Project
 import org.springframework.jenkins.cloud.common.ReleaseTrain
 

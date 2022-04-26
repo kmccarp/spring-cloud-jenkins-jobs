@@ -23,11 +23,11 @@ class SpringCloudReleaseMaker implements JdkConfig, TestPublisher,
 	protected static final String DRY_RUN_PARAM = "DRY_RUN"
 	protected static final String RELEASER_META_RELEASE_GIT_ORG_URL_VAR = "RELEASER_META_RELEASE_GIT_ORG_URL"
 	protected static final String RELEASER_ADDITIONAL_PROPS_VAR = "RELEASER_ADDITIONAL_PROPS"
-	protected static final String RELEASER_SAGAN_UPDATE_VAR= 'RELEASER_SAGAN_UPDATE'
+	protected static final String RELEASER_SAGAN_UPDATE_VAR = 'RELEASER_SAGAN_UPDATE'
 	protected static final String RELEASER_RELEASE_TRAIN_PROJECT_NAME_VAR = 'RELEASER_META_RELEASE_RELEASE_TRAIN_PROJECT_NAME'
-	protected static final String RELEASER_GIT_RELEASE_TRAIN_BOM_URL_VAR= 'RELEASER_GIT_RELEASE_TRAIN_BOM'
+	protected static final String RELEASER_GIT_RELEASE_TRAIN_BOM_URL_VAR = 'RELEASER_GIT_RELEASE_TRAIN_BOM'
 	protected static final String RELEASER_POM_THIS_TRAIN_BOM_VAR = 'RELEASER_POM_THIS_TRAIN'
-	protected static final String RELEASER_POST_RELEASE_ONLY_VAR= 'RELEASER_POST_RELEASE_ONLY'
+	protected static final String RELEASER_POST_RELEASE_ONLY_VAR = 'RELEASER_POST_RELEASE_ONLY'
 
 	private final DslFactory dsl
 	final String organization

@@ -1,11 +1,12 @@
 package org.springframework.jenkins.cloud.e2e
 
-import org.springframework.jenkins.cloud.common.AllCloudJobs
-import org.springframework.jenkins.common.job.JdkConfig
 import javaposse.jobdsl.dsl.DslFactory
+
+import org.springframework.jenkins.cloud.common.AllCloudJobs
 import org.springframework.jenkins.cloud.common.SpringCloudJobs
 import org.springframework.jenkins.cloud.common.SpringCloudNotification
 import org.springframework.jenkins.common.job.Cron
+import org.springframework.jenkins.common.job.JdkConfig
 import org.springframework.jenkins.common.job.TestPublisher
 
 /**

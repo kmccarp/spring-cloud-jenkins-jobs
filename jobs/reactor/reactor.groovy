@@ -2,9 +2,6 @@ package reactor
 
 import javaposse.jobdsl.dsl.DslFactory
 
-import org.springframework.jenkins.cloud.release.SpringCloudMetaReleaseMaker
-import org.springframework.jenkins.cloud.release.SpringCloudMetaReleaseRepoPurger
-import org.springframework.jenkins.cloud.release.SpringCloudReleaseMaker
 import org.springframework.jenkins.cloud.release.SpringCloudReleaserOptions
 import org.springframework.jenkins.reactor.ReactorMetaReleaseMaker
 import org.springframework.jenkins.reactor.ReactorMetaReleaseRepoPurger

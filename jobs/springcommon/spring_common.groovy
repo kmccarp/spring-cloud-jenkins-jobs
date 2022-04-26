@@ -1,6 +1,7 @@
 package springcommon
 
 import javaposse.jobdsl.dsl.DslFactory
+
 import org.springframework.jenkins.cloud.ci.SpringCloudDeployBuildMaker
 
 DslFactory dsl = this

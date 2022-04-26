@@ -6,10 +6,10 @@ class BreweryEndToEndBuildMakerSpec extends Specification {
 
 	def 'should use boot function for a release train that does not use a concrete boot version'() {
 		given:
-			BreweryEndToEndBuildMaker maker = new BreweryEndToEndBuildMaker()
+		BreweryEndToEndBuildMaker maker = new BreweryEndToEndBuildMaker()
 		when:
-			String switches = maker.defaultSwitches("hoxton")
+		String switches = maker.defaultSwitches("hoxton")
 		then:
-			switches.contains("bootVersion")
+		switches.contains("bootVersion")
 	}
 }
