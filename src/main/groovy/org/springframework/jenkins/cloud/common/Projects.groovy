@@ -86,7 +86,7 @@ class Projects {
 			repo: "spring-cloud-sleuth"
 	)
 
-	public static final Project STREAM = new StreamProject(
+	public static final Project STREAM = new Project(
 			repo: "spring-cloud-stream"
 	)
 
