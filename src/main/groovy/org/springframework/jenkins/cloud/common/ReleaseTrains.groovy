@@ -91,7 +91,7 @@ class ReleaseTrains {
 					(TRAIN_DOCS)    : "2021.0.x",
 					(SLEUTH)        : "3.1.x",
 					(STREAM)        : "3.2.x",
-					(TASK)          : "2.3.x",
+					(TASK)          : "2.4.x",
 					(VAULT)         : "3.1.x",
 					(ZOOKEEPER)     : "3.1.x",
 			]
