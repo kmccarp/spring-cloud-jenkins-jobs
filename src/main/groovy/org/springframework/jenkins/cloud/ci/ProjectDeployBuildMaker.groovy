@@ -101,12 +101,15 @@ class ProjectDeployBuildMaker implements JdkConfig, TestPublisher, CloudCron,
 			configure {
 				slack.call(it as Node)
 			}
-			if (project.publishTests(buildContext)) {
+			if (project.publishTests(buildContext) || project.notificationEmails) {
 				publishers {
 					archiveJunit mavenJUnitResults()
 					if (project.buildSystem == Project.BuildSystem.GRADLE
 							|| project.buildSystem == Project.BuildSystem.BOTH) {
 						archiveJunit gradleJUnitResults()
+					}
+					if (project.notificationEmails) {
+						mailer(project.notificationEmails, true, true)
 					}
 				}
 			}

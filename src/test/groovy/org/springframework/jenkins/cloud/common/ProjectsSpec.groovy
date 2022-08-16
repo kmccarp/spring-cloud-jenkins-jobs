@@ -21,6 +21,9 @@ class ProjectsSpec extends Specification {
 		Projects.TRAIN_DOCS.name == "spring-cloud-release-train-docs"
 		Projects.TRAIN_DOCS.getName() == "spring-cloud-release-train-docs"
 		!Projects.TRAIN_DOCS.checkJdkCompatibility
+		!Projects.BUS.notificationEmails
+		Projects.STREAM.notificationEmails
+		Projects.STREAM.notificationEmails.contains("@vmware.com")
 	}
 
 }

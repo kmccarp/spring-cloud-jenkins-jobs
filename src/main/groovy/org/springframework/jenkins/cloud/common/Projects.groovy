@@ -87,7 +87,8 @@ class Projects {
 	)
 
 	public static final Project STREAM = new Project(
-			repo: "spring-cloud-stream"
+			repo: "spring-cloud-stream",
+			notificationEmails: "ozhurakousky@vmware.com chackos@vmware.com "
 	)
 
 	public static final Project TASK = new Project(

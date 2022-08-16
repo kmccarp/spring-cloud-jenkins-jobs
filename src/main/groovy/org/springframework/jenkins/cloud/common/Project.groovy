@@ -40,6 +40,9 @@ class Project {
 	// included in boot compatibility?
 	boolean checkBootCompatibility = true
 
+	// emails to notify for failures
+	String notificationEmails
+
 	String getName() {
 		return name ?: repo
 	}
