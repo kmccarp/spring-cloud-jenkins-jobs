@@ -121,7 +121,6 @@ class EndToEndBuildMaker implements TestPublisher,
 			}
 			publishers {
 				if (withTests) {
-					archiveJunit gradleJUnitResults()
 					archiveArtifacts {
 						pattern acceptanceTestReports()
 						allowEmpty()
@@ -133,6 +132,8 @@ class EndToEndBuildMaker implements TestPublisher,
 				}
 				if (mavenTests) {
 					archiveJunit mavenJUnitResults()
+				} else {
+					archiveJunit gradleJUnitResults()
 				}
 			}
 		}
