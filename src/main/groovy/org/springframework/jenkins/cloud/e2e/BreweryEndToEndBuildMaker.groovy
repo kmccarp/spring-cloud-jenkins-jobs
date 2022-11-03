@@ -35,11 +35,11 @@ class BreweryEndToEndBuildMaker extends EndToEndBuildMaker {
 		String defaultSwitches = defaultSwitches(releaseTrainName)
 		int train = Integer.parseInt(releaseTrainName.split("\\.")[0])
 		if (releaseTrainName.startsWith("2020") || releaseTrainName.startsWith("2021")) {
-			super.build("$prefix-sleuth", repoName(), "runAcceptanceTests.sh -t SLEUTH $defaultSwitches", oncePerDay())
+			super.build("$prefix-sleuth", repoName(), "runAcceptanceTests.sh -t SLEUTH $defaultSwitches", oncePerDay(), true, "", train >= 2022)
 		}
-		super.build("$prefix-eureka", repoName(), "runAcceptanceTests.sh -t EUREKA $defaultSwitches", oncePerDay())
-		super.build("$prefix-consul", repoName(), "runAcceptanceTests.sh -t CONSUL $defaultSwitches", oncePerDay())
-		super.build("$prefix-zookeeper", repoName(), "runAcceptanceTests.sh -t ZOOKEEPER $defaultSwitches", oncePerDay())
+		super.build("$prefix-eureka", repoName(), "runAcceptanceTests.sh -t EUREKA $defaultSwitches", oncePerDay(), true, "", train >= 2022)
+		super.build("$prefix-consul", repoName(), "runAcceptanceTests.sh -t CONSUL $defaultSwitches", oncePerDay(), true, "", train >= 2022)
+		super.build("$prefix-zookeeper", repoName(), "runAcceptanceTests.sh -t ZOOKEEPER $defaultSwitches", oncePerDay(), true, "", train >= 2022)
 		if (!prefix.toLowerCase().startsWith("hoxton")) {
 			super.build("$prefix-wavefront", repoName(), "runAcceptanceTests.sh -t WAVEFRONT $defaultSwitches", oncePerDay(), true, "", train >= 2022)
 		}
