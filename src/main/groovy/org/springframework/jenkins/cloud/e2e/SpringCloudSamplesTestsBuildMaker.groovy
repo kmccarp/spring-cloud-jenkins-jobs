@@ -64,6 +64,9 @@ class SpringCloudSamplesTestsBuildMaker implements TestPublisher,
 					usernamePassword(dockerhubUserNameEnvVar(),
 							dockerhubPasswordEnvVar(),
 							dockerhubCredentialId())
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
 				}
 			}
 			scm {

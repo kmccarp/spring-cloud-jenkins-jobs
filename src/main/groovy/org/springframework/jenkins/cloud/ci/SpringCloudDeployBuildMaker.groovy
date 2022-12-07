@@ -99,6 +99,9 @@ class SpringCloudDeployBuildMaker implements JdkConfig, TestPublisher, CloudCron
 					usernamePassword(githubRepoUserNameEnvVar(),
 							githubRepoPasswordEnvVar(),
 							githubUserCredentialId())
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
 					string(githubToken(), githubTokenCredId())
 				}
 				timeout {

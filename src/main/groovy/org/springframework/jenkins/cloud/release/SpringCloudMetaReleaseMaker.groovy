@@ -103,6 +103,9 @@ class SpringCloudMetaReleaseMaker implements JdkConfig, TestPublisher,
 					usernamePassword(githubRepoUserNameEnvVar(),
 							githubRepoPasswordEnvVar(),
 							githubUserCredentialId())
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
 					file(gpgSecRing(), "spring-signing-secring.gpg")
 					file(gpgPubRing(), "spring-signing-pubring.gpg")
 					string(gpgPassphrase(), "spring-gpg-passphrase")

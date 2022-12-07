@@ -40,6 +40,11 @@ class SleuthBenchmarksBuildMaker implements JdkConfig, Cron {
 			wrappers {
 				timestamps()
 				colorizeOutput()
+				credentialsBinding {
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
+				}
 				timeout {
 					noActivity(600)
 					failBuild()

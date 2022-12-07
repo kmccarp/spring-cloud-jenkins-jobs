@@ -59,6 +59,13 @@ class SonarBuildMaker implements JdkConfig, TestPublisher, SonarTrait, Cron {
 				SpringCloudNotification.cloudSlack(it as Node)
 				appendSonar(it as Node)
 			}
+			wrappers {
+				credentialsBinding {
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
+				}
+			}
 		}
 	}
 

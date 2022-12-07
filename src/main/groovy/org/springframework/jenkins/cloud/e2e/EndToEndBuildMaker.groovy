@@ -77,6 +77,9 @@ class EndToEndBuildMaker implements TestPublisher,
 					usernamePassword(dockerhubUserNameEnvVar(),
 							dockerhubPasswordEnvVar(),
 							dockerhubCredentialId())
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
 					string("WAVEFRONT_API_TOKEN", "brewery-wavefront-token")
 				}
 			}

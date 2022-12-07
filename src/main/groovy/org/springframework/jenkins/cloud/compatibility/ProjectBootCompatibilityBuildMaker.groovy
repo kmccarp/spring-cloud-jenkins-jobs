@@ -65,6 +65,9 @@ class ProjectBootCompatibilityBuildMaker extends CompatibilityTasks implements J
 					usernamePassword(dockerhubUserNameEnvVar(),
 							dockerhubPasswordEnvVar(),
 							dockerhubCredentialId())
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
 				}
 			}
 			steps {

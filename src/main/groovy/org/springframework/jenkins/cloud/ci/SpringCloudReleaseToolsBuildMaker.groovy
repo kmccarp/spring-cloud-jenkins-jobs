@@ -57,6 +57,9 @@ class SpringCloudReleaseToolsBuildMaker implements JdkConfig, TestPublisher, Cro
 					usernamePassword(githubRepoUserNameEnvVar(),
 							githubRepoPasswordEnvVar(),
 							githubUserCredentialId())
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
 					string(githubToken(), githubTokenCredId())
 				}
 				timeout {

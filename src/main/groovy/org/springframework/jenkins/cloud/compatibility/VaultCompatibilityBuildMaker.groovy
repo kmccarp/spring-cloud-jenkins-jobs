@@ -56,6 +56,9 @@ class VaultCompatibilityBuildMaker extends CompatibilityBuildMaker implements Ha
 					usernamePassword(dockerhubUserNameEnvVar(),
 							dockerhubPasswordEnvVar(),
 							dockerhubCredentialId())
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
 				}
 			}
 			steps {

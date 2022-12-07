@@ -70,6 +70,9 @@ class ProjectDeployBuildMaker implements JdkConfig, TestPublisher, CloudCron,
 					usernamePassword(githubRepoUserNameEnvVar(),
 							githubRepoPasswordEnvVar(),
 							githubUserCredentialId())
+					usernamePassword(buildUserNameEnvVar(),
+							buildPasswordEnvVar(),
+							buildCredentialId())
 					string(githubToken(), githubTokenCredId())
 					if (project.buildSystem == Project.BuildSystem.GRADLE
 							|| project.buildSystem == Project.BuildSystem.BOTH) {

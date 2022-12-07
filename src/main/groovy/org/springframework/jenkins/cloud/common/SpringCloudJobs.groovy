@@ -195,6 +195,18 @@ if [ -n "\$(type gtimeout)" ]; then gtimeout 10s docker ps -a -q | xargs -n 1 -P
 		return 'hub.docker.com-springbuildmaster'
 	}
 
+	String buildUserNameEnvVar() {
+		return 'ARTIFACTORY_USERNAME'
+	}
+
+	String buildPasswordEnvVar() {
+		return 'ARTIFACTORY_PASSWORD'
+	}
+
+	String buildCredentialId() {
+		return '02bd1690-b54f-4c9f-819d-a77cb7a9822c'
+	}
+
 	String githubUserName() {
 		return 'spring-buildmaster'
 	}
