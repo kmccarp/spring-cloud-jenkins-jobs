@@ -131,7 +131,7 @@ class SpringCloudReleaseMaker implements JdkConfig, TestPublisher,
 				${additionalEnvVars()}
 				set +x
 				SPRING_CLOUD_RELEASE_REPO="https://github.com/spring-cloud/spring-cloud-release.git"
-				SYSTEM_PROPS="-Dgpg.secretKeyring="\$${gpgSecRing()}" -Dgpg.publicKeyring="\$${gpgPubRing()}" -Dgpg.passphrase="\$${gpgPassphrase()}" -DSONATYPE_USER="\$${sonatypeUser()}" -DSONATYPE_PASSWORD="\$${sonatypePassword()}""
+				SYSTEM_PROPS="-Dgpg.secretKeyring="\$${gpgSecRing()}" -Dgpg.publicKeyring="\$${gpgPubRing()}" -Dgpg.passphrase="\$${gpgPassphrase()}" -DSONATYPE_USER="\$${sonatypeUser()}" -DSONATYPE_PASSWORD="\$${sonatypePassword()}" -DARTIFACTORY_USERNAME="\$${buildUserNameEnvVar()}" -DARTIFACTORY_PASSWORD="\$${buildPasswordEnvVar()}""
 				java \${${RELEASER_ADDITIONAL_PROPS_VAR}} -Dreleaser.git.username="\$${githubRepoUserNameEnvVar()}" -Dreleaser.git.password="\$${githubRepoPasswordEnvVar()}" -jar \${releaserJarLocation}/${options.projectName}*SNAPSHOT.jar ${releaserOptions()} \$additionalParams || exit 1
 				${cleanGitCredentials()}
 				""")
