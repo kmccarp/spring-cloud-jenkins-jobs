@@ -1,7 +1,7 @@
 package org.springframework.jenkins.cloud.ci
 
 import javaposse.jobdsl.dsl.DslFactory
-
+import org.springframework.jenkins.cloud.common.SpringCloudJobs
 import org.springframework.jenkins.cloud.common.SpringCloudNotification
 import org.springframework.jenkins.common.job.Cron
 import org.springframework.jenkins.common.job.JdkConfig
@@ -9,7 +9,7 @@ import org.springframework.jenkins.common.job.JdkConfig
 /**
  * @author Marcin Grzejszczak
  */
-class SleuthBenchmarksBuildMaker implements JdkConfig, Cron {
+class SleuthBenchmarksBuildMaker implements JdkConfig, Cron, SpringCloudJobs {
 	private final DslFactory dsl
 
 	SleuthBenchmarksBuildMaker(DslFactory dsl) {

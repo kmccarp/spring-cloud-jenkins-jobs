@@ -2,7 +2,7 @@ package org.springframework.jenkins.cloud.qa
 
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.helpers.step.StepContext
-
+import org.springframework.jenkins.cloud.common.SpringCloudJobs
 import org.springframework.jenkins.cloud.common.SpringCloudNotification
 import org.springframework.jenkins.common.job.Cron
 import org.springframework.jenkins.common.job.JdkConfig
@@ -12,7 +12,7 @@ import org.springframework.jenkins.common.job.TestPublisher
 /**
  * @author Marcin Grzejszczak
  */
-class SonarBuildMaker implements JdkConfig, TestPublisher, SonarTrait, Cron {
+class SonarBuildMaker implements JdkConfig, TestPublisher, SonarTrait, Cron, SpringCloudJobs {
 
 	private final DslFactory dsl
 
