@@ -60,6 +60,11 @@ class VaultCompatibilityBuildMaker extends CompatibilityBuildMaker implements Ha
 							buildPasswordEnvVar(),
 							buildCredentialId())
 				}
+				configFiles {
+					file(mavenSettingsId()) {
+						targetLocation('${HOME}/.m2/settings.xml')
+					}
+				}
 			}
 			steps {
 				shell(loginToDocker())

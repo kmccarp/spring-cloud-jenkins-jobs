@@ -101,6 +101,11 @@ class SpringCloudReleaseMaker implements JdkConfig, TestPublisher,
 					usernamePassword(sonatypeUser(), sonatypePassword(),
 							"oss-s01-token")
 					additionalCredentials(delegate as CredentialsBindingContext)
+					configFiles {
+						file(mavenSettingsId()) {
+							targetLocation('${HOME}/.m2/settings.xml')
+						}
+					}
 				}
 				timeout {
 					noActivity(600)

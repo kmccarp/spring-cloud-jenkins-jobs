@@ -65,6 +65,11 @@ class SonarBuildMaker implements JdkConfig, TestPublisher, SonarTrait, Cron, Spr
 							buildPasswordEnvVar(),
 							buildCredentialId())
 				}
+				configFiles {
+					file(mavenSettingsId()) {
+						targetLocation('${HOME}/.m2/settings.xml')
+					}
+				}
 			}
 		}
 	}

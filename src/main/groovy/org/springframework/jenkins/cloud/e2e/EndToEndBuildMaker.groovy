@@ -82,6 +82,11 @@ class EndToEndBuildMaker implements TestPublisher,
 							buildCredentialId())
 					string("WAVEFRONT_API_TOKEN", "brewery-wavefront-token")
 				}
+				configFiles {
+					file(mavenSettingsId()) {
+						targetLocation('${HOME}/.m2/settings.xml')
+					}
+				}
 			}
 			scm {
 				git {

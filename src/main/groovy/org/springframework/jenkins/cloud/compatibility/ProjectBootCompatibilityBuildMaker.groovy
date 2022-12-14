@@ -69,6 +69,11 @@ class ProjectBootCompatibilityBuildMaker extends CompatibilityTasks implements J
 							buildPasswordEnvVar(),
 							buildCredentialId())
 				}
+				configFiles {
+					file(mavenSettingsId()) {
+						targetLocation('${HOME}/.m2/settings.xml')
+					}
+				}
 			}
 			steps {
 				shell(loginToDocker())

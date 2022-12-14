@@ -45,6 +45,11 @@ class SleuthBenchmarksBuildMaker implements JdkConfig, Cron, SpringCloudJobs {
 							buildPasswordEnvVar(),
 							buildCredentialId())
 				}
+				configFiles {
+					file(mavenSettingsId()) {
+						targetLocation('${HOME}/.m2/settings.xml')
+					}
+				}
 				timeout {
 					noActivity(600)
 					failBuild()

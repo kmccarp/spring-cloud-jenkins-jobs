@@ -104,6 +104,11 @@ class SpringCloudDeployBuildMaker implements JdkConfig, TestPublisher, CloudCron
 							buildCredentialId())
 					string(githubToken(), githubTokenCredId())
 				}
+				configFiles {
+					file(mavenSettingsId()) {
+						targetLocation('${HOME}/.m2/settings.xml')
+					}
+				}
 				timeout {
 					noActivity(600)
 					failBuild()

@@ -68,6 +68,11 @@ class SpringCloudSamplesTestsBuildMaker implements TestPublisher,
 							buildPasswordEnvVar(),
 							buildCredentialId())
 				}
+				configFiles {
+					file(mavenSettingsId()) {
+						targetLocation('${HOME}/.m2/settings.xml')
+					}
+				}
 			}
 			scm {
 				git {

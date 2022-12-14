@@ -67,6 +67,11 @@ class SpringCloudReleaseToolsBuildMaker implements JdkConfig, TestPublisher, Cro
 					failBuild()
 					writeDescription('Build failed due to timeout after {0} minutes of inactivity')
 				}
+				configFiles {
+					file(mavenSettingsId()) {
+						targetLocation('${HOME}/.m2/settings.xml')
+					}
+				}
 			}
 			steps {
 				shell(removeMavenInstallation())
