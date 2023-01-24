@@ -28,7 +28,7 @@ class AllCloudConstants {
 	/**
 	 * List of skipped projects for Spring Cloud meta release
 	 */
-	public static final String DEFAULT_RELEASER_SKIPPED_PROJECTS = "spring-boot,spring-cloud-stream,spring-cloud-stream-binder-rabbit,spring-cloud-schema-registry,spring-cloud-stream-binder-kafka,spring-cloud-stream-starters,spring-cloud-function"
+	public static final String DEFAULT_RELEASER_SKIPPED_PROJECTS = "spring-boot"
 
 	/**
 	 * Latest version of Boot to be checked. Used in some E2E test (e.g. Camden vs latest Boot)
