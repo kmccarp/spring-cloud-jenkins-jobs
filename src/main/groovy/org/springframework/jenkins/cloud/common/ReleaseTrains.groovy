@@ -43,7 +43,7 @@ class ReleaseTrains {
 			version: "2022.0",
 			codename: "Kilburn",
 			jdks: [jdks.jdk17()],
-			bootVersions: ["3.0.x"],
+			bootVersions: ["3.0.x", "3.1.x"],
 			projectsWithBranch: [
 					(BUILD)         : "main",
 					(BUS)           : "main",
