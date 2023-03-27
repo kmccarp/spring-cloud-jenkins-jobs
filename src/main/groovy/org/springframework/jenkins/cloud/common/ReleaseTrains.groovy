@@ -42,7 +42,7 @@ class ReleaseTrains {
 	public static final ReleaseTrain KILBURN = new ReleaseTrain(
 			version: "2022.0",
 			codename: "Kilburn",
-			jdks: [jdks.jdk17()],
+			jdks: [jdks.jdk17(), jdks.jdk20()],
 			bootVersions: ["3.0.x", "3.1.x"],
 			projectsWithBranch: [
 					(BUILD)         : "main",
