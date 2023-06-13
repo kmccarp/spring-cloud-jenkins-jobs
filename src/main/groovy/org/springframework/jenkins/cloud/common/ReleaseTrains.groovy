@@ -39,11 +39,11 @@ class ReleaseTrains {
 
 	static CloudJdkConfig jdks = new CloudJdkConfig();
 
-	public static final ReleaseTrain KILBURN = new ReleaseTrain(
-			version: "2022.0",
-			codename: "Kilburn",
-			jdks: [jdks.jdk17(), jdks.jdk20()],
-			bootVersions: ["3.0.x", "3.1.x"],
+	public static final ReleaseTrain LEYTON = new ReleaseTrain(
+			version: "2023.0",
+			codename: "Leyton",
+			jdks: [jdks.jdk17()], // TODO: Add 21
+			bootVersions: ["3.2.x"],
 			projectsWithBranch: [
 					(BUILD)         : "main",
 					(BUS)           : "main",
@@ -64,6 +64,34 @@ class ReleaseTrains {
 					(TASK)          : "main",
 					(VAULT)         : "main",
 					(ZOOKEEPER)     : "main",
+			]
+	)
+
+	public static final ReleaseTrain KILBURN = new ReleaseTrain(
+			version: "2022.0",
+			codename: "Kilburn",
+			jdks: [jdks.jdk17(), jdks.jdk20()],
+			bootVersions: ["3.0.x", "3.1.x"],
+			projectsWithBranch: [
+					(BUILD)         : "4.0.x",
+					(BUS)           : "4.0.x",
+					(CIRCUITBREAKER): "3.0.x",
+					(COMMONS)       : "4.0.x",
+					(CONFIG)        : "4.0.x",
+					(CONSUL)        : "4.0.x",
+					(CONTRACT)      : "4.0.x",
+					(CORE_TESTS)    : "4.0.x",
+					(GATEWAY)       : "4.0.x",
+					(FUNCTION)      : "4.0.x",
+					(KUBERNETES)    : "3.0.x",
+					(NETFLIX)       : "4.0.x",
+					(OPENFEIGN)     : "4.0.x",
+					(RELEASE)       : "2022.0.x",
+					(STREAM)        : "4.0.x",
+					(TRAIN_DOCS)    : "2022.0.x",
+					(TASK)          : "3.0.x",
+					(VAULT)         : "4.0.x",
+					(ZOOKEEPER)     : "4.0.x",
 			]
 	)
 	public static final ReleaseTrain JUBILEE = new ReleaseTrain(
@@ -175,7 +203,7 @@ class ReleaseTrains {
 			]
 	)
 
-	public static final List<ReleaseTrain> ALL = [TOOLS, EXPERIMENTAL, HOXTON, ILFORD, JUBILEE, KILBURN]
+	public static final List<ReleaseTrain> ALL = [TOOLS, EXPERIMENTAL, HOXTON, ILFORD, JUBILEE, KILBURN, LEYTON]
 
 	public static final Map<String, ReleaseTrain> ALL_BY_CODENAME = ALL.collectEntries { [it.codename, it] }
 
