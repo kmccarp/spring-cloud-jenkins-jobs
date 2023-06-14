@@ -80,7 +80,7 @@ class ReleaseTrains {
 					(CONFIG)        : "4.0.x",
 					(CONSUL)        : "4.0.x",
 					(CONTRACT)      : "4.0.x",
-					(CORE_TESTS)    : "4.0.x",
+					(CORE_TESTS)    : "2022.0.x",
 					(GATEWAY)       : "4.0.x",
 					(FUNCTION)      : "4.0.x",
 					(KUBERNETES)    : "3.0.x",
