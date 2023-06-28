@@ -43,7 +43,7 @@ class SpringCloudReleaseMaker implements JdkConfig, TestPublisher,
 	}
 
 	void release(String project, ReleaserOptions options = new ReleaserOptions()) {
-		release(project, jdk8(), mainBranch(), mainBranch(), options)
+		release(project, jdk17(), mainBranch(), mainBranch(), options)
 	}
 
 	void release(String project, String jdkVersion, String projectBranch, String releaserBranch, ReleaserOptions options = new ReleaserOptions()) {

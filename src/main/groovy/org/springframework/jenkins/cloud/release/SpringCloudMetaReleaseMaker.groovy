@@ -46,7 +46,7 @@ class SpringCloudMetaReleaseMaker implements JdkConfig, TestPublisher,
 	}
 
 	void release(String jobName, ReleaserOptions options = new ReleaserOptions()) {
-		release(jobName, jdk8(), options)
+		release(jobName, jdk17(), options)
 	}
 
 	void release(String jobName, String jdkVersion, ReleaserOptions options = new ReleaserOptions()) {
