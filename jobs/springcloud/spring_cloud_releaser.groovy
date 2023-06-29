@@ -20,7 +20,7 @@ ReleaseTrains.allActive().each { train ->
 	// meta releaser per train, for jdk configuration
 	if (train.metaRelease) {
 		new SpringCloudMetaReleaseMaker(dsl)
-				.release("spring-cloud-${train.codename}-meta-releaser", train.jdkBaseline(),
+				.release("spring-cloud-${train.codename}-meta-releaser", ReleaseTrains.jdks.jdk17(),
 						SpringCloudReleaserOptions.springCloud())
 	}
 

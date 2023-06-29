@@ -5,6 +5,7 @@ import javaposse.jobdsl.dsl.jobs.FreeStyleJob
 
 import org.springframework.jenkins.cloud.common.Project
 import org.springframework.jenkins.cloud.common.ReleaseTrain
+import org.springframework.jenkins.cloud.common.ReleaseTrains
 
 /**
  * @author Marcin Grzejszczak
@@ -30,7 +31,7 @@ class SpringCloudReleaseSnapshotMaker extends SpringCloudReleaseMaker {
 
 	void release(ReleaserOptions options) {
 		options.updateSagan = false
-		super.release(project.repo, train.jdkBaseline(), branch, train.releaseBranch(), options)
+		super.release(project.repo, ReleaseTrains.jdks.jdk17(), branch, train.releaseBranch(), options)
 	}
 
 	@Override
