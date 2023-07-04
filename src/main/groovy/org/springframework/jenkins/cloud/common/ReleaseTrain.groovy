@@ -35,6 +35,8 @@ class ReleaseTrain {
 	// jdk compatibility, first is baseline
 	List<String> jdks = []
 
+	String releaserJdk
+
 	String jdkBaseline() {
 		return jdks.isEmpty() ? null : jdks[0]
 	}

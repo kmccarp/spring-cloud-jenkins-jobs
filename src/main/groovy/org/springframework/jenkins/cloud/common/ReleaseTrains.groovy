@@ -43,6 +43,7 @@ class ReleaseTrains {
 			version: "2023.0",
 			codename: "Leyton",
 			jdks: [jdks.jdk17()], // TODO: Add 21
+			releaserJdk: jdks.jdk17(),
 			bootVersions: ["3.2.x"],
 			projectsWithBranch: [
 					(BUILD)         : "main",
@@ -71,6 +72,7 @@ class ReleaseTrains {
 			version: "2022.0",
 			codename: "Kilburn",
 			jdks: [jdks.jdk17(), jdks.jdk20()],
+			releaserJdk: jdks.jdk17(),
 			bootVersions: ["3.0.x", "3.1.x"],
 			projectsWithBranch: [
 					(BUILD)         : "4.0.x",
@@ -99,6 +101,7 @@ class ReleaseTrains {
 			codename: "Jubilee",
 			bootVersions: ["2.6.x", "2.7.x"],
 			jdks: [jdks.jdk8(), jdks.jdk11(), jdks.jdk17()],
+			releaserJdk: jdks.jdk11(),
 			projectsWithBranch: [
 					(BUILD)         : "3.1.x",
 					(BUS)           : "3.1.x",
@@ -129,6 +132,7 @@ class ReleaseTrains {
 			codename: "Ilford",
 			bootVersions: ["2.4.x", "2.5.x"],
 			jdks: [jdks.jdk8(), jdks.jdk11(), jdks.jdk17()],
+			releaserJdk: jdks.jdk11(),
 			projectsWithBranch: [
 					(BUILD)         : "3.0.x",
 					(BUS)           : "3.0.x",
@@ -158,6 +162,7 @@ class ReleaseTrains {
 			codename: "Hoxton",
 			active: false,
 			jdks: [jdks.jdk8()],
+			releaserJdk: jdks.jdk11(),
 			bootVersions: ["2.3.x"],
 			projectsWithBranch: [
 					(BUILD)         : "2.3.x",
@@ -186,6 +191,7 @@ class ReleaseTrains {
 			codename: "Experimental",
 			metaRelease: false,
 			jdks: [jdks.jdk8()],
+			releaserJdk: jdks.jdk11(),
 			bootVersions: ["2.6.x"],
 			projectsWithBranch: [
 					(SQUARE)     : "main",
@@ -196,8 +202,9 @@ class ReleaseTrains {
 			version: "Tools",
 			codename: "Tools",
 			metaRelease: false,
-			jdks: [jdks.jdk8(), jdks.jdk17()],
-			bootVersions: ["2.6.x"],
+			jdks: [jdks.jdk17()],
+			releaserJdk: jdks.jdk17(),
+			bootVersions: ["3.1.x"],
 			projectsWithBranch: [
 					(RELEASE_TOOLS): "main",
 			]

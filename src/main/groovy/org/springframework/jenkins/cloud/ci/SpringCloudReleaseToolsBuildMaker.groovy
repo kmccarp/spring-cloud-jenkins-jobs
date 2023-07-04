@@ -24,10 +24,10 @@ class SpringCloudReleaseToolsBuildMaker implements JdkConfig, TestPublisher, Cro
 	}
 
 	void deploy(boolean checkTests = true) {
-		deploy(mainBranch(), checkTests)
+		deploy(mainBranch(), jdk17(), checkTests)
 	}
 
-	void deploy(String branchToBuild, boolean checkTests = true) {
+	void deploy(String branchToBuild, String jdkVersion, boolean checkTests = true) {
 		String projectNameWithBranch = branchToBuild ? "$branchToBuild-" : ''
 		dsl.job("$project-${projectNameWithBranch}ci") {
 			triggers {
@@ -36,7 +36,7 @@ class SpringCloudReleaseToolsBuildMaker implements JdkConfig, TestPublisher, Cro
 			parameters {
 				stringParam(branchVarName(), branchToBuild ?: mainBranch(), 'Which branch should be built')
 			}
-			jdk jdk17()
+			jdk jdkVersion
 			scm {
 				git {
 					remote {

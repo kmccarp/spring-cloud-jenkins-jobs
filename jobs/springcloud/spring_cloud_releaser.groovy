@@ -2,6 +2,7 @@ package springcloud
 
 import javaposse.jobdsl.dsl.DslFactory
 
+import org.springframework.jenkins.cloud.ci.SpringCloudReleaseToolsBuildMaker
 import org.springframework.jenkins.cloud.common.ReleaseTrains
 import org.springframework.jenkins.cloud.release.ReleaserOptions
 import org.springframework.jenkins.cloud.release.SpringCloudMetaReleaseMaker
@@ -15,12 +16,18 @@ import static org.springframework.jenkins.cloud.common.AllCloudJobs.ALL_STREAM_J
 
 DslFactory dsl = this
 
+new SpringCloudReleaseToolsBuildMaker(dsl).with {
+	deploy(mainBranch(), jdk17(), true)
+	deploy("2.0.x", jdk11(), true)
+}
+
 // RELEASER
 ReleaseTrains.allActive().each { train ->
 	// meta releaser per train, for jdk configuration
 	if (train.metaRelease) {
 		new SpringCloudMetaReleaseMaker(dsl)
-				.release("spring-cloud-${train.codename}-meta-releaser", ReleaseTrains.jdks.jdk17(),
+				.release(	"spring-cloud-${train.codename}-meta-releaser",
+						train.releaserJdk,
 						SpringCloudReleaserOptions.springCloud())
 	}
 
