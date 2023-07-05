@@ -6,6 +6,7 @@ class SpringCloudContractSamplesEndToEndBuilder extends SpringCloudSamplesEndToE
 
 	void buildAll(DslFactory dsl) {
 		buildMavenAndGradle(mainBranch(), jdk17(), dsl)
+		buildMavenAndGradle("4.0.x", jdk17(), dsl)
 		buildMavenAndGradle("3.1.x", jdk11(), dsl)
 	}
 
