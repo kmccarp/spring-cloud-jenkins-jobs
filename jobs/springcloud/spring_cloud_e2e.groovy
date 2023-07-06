@@ -21,10 +21,11 @@ new SleuthEndToEndBuildMaker(dsl).with {
 // CONTRACT
 new SpringCloudContractSamplesEndToEndBuilder().buildAll(dsl)
 
-new SpringCloudSamplesEndToEndBuildMaker(dsl).with {
-	buildWithMavenTests("the-legacy-app", mainBranch(), oncePerDay())
-	buildWithMavenTests("sc-contract-car-rental", mainBranch(), oncePerDay())
-}
+// Bring back once there's more priority on contract
+//new SpringCloudSamplesEndToEndBuildMaker(dsl).with {
+//	buildWithMavenTests("the-legacy-app", mainBranch(), oncePerDay())
+//	buildWithMavenTests("sc-contract-car-rental", mainBranch(), oncePerDay())
+//}
 
 new NetflixEndToEndBuildMaker(dsl).with {
 	build(oncePerDay())
