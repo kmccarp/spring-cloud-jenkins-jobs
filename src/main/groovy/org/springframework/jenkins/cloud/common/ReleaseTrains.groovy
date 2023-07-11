@@ -130,6 +130,7 @@ class ReleaseTrains {
 	public static final ReleaseTrain ILFORD = new ReleaseTrain(
 			version: "2020.0",
 			codename: "Ilford",
+			active: false,
 			bootVersions: ["2.4.x", "2.5.x"],
 			jdks: [jdks.jdk8(), jdks.jdk11(), jdks.jdk17()],
 			releaserJdk: jdks.jdk11(),
