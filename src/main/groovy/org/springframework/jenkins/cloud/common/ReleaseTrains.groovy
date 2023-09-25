@@ -61,7 +61,6 @@ class ReleaseTrains {
 					(OPENFEIGN)     : "main",
 					(RELEASE)       : "main",
 					(STREAM)        : "main",
-					(TRAIN_DOCS)    : "main",
 					(TASK)          : "main",
 					(VAULT)         : "main",
 					(ZOOKEEPER)     : "main",
