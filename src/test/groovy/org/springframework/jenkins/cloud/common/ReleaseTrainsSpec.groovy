@@ -18,7 +18,7 @@ class ReleaseTrainsSpec extends Specification implements JdkConfig {
 		ReleaseTrains.LEYTON.codename == "Leyton"
 		ReleaseTrains.LEYTON.bootVersions.containsAll(["3.2.x"])
 		ReleaseTrains.LEYTON.jdks.containsAll([jdk17()])
-		ReleaseTrains.LEYTON.projectsWithBranch.size() == 19
+		ReleaseTrains.LEYTON.projectsWithBranch.size() == 18
 		ReleaseTrains.KILBURN.version == "2022.0"
 		ReleaseTrains.KILBURN.codename == "Kilburn"
 		ReleaseTrains.KILBURN.bootVersions.containsAll(["3.0.x"])
