@@ -57,9 +57,7 @@ class SpringCloudDeployBuildMaker implements JdkConfig, TestPublisher, CloudCron
 			return jobName
 		}
 		String projectNameWithBranch = branchToBuild ? "$branchToBuild-" : ''
-		String prefixedName = prefixedName(project)
-		String jobName = "${prefixedName}-${projectNameWithBranch}ci"
-		return jobName
+		String prefixedName = prefixedName(project)return "${prefixedName}-${projectNameWithBranch}ci"
 	}
 
 	void deploy(String project, String branchToBuild, boolean checkTests = true) {
