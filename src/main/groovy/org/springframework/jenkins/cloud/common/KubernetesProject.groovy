@@ -24,15 +24,13 @@ class KubernetesProject extends Project implements JdkConfig, SpringCloudJobs {
 			}
 			return cmd
 		}
-		else {
-			List<String> cmd = [
+		else {return [
 					"./mvnw clean install -Pspring -B -U",
 					context.upload ? "./mvnw deploy -Pdocs,deploy,spring -B -U -DskipTests=true" : "./mvnw install -Pdeploy,spring -B -U -DskipTests=true",
 					"""./mvnw dockerfile:push -pl :spring-cloud-kubernetes-configuration-watcher -Pdockerpush""",
 					"./mvnw dockerfile:push -pl :spring-cloud-kubernetes-configserver -Pdockerpush",
 					"./mvnw dockerfile:push -pl :spring-cloud-kubernetes-discoveryserver -Pdockerpush"
 			]
-			return cmd
 		}
 	}
 

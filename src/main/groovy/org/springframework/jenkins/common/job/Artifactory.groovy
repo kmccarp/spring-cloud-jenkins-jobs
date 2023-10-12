@@ -7,8 +7,8 @@ package org.springframework.jenkins.common.job
  */
 class Artifactory {
 
-	private static String DEFAULT_ARTIFACTORY_NAME = '-1638662726@1458342414489'
-	private static String DEFAULT_ARTIFACTORY_URL = 'https://repo.spring.io'
+    private static final String DEFAULT_ARTIFACTORY_NAME = '-1638662726@1458342414489'
+    private static final String DEFAULT_ARTIFACTORY_URL = 'https://repo.spring.io'
 
 	static void artifactoryMavenBuild(Node rootNode, @DelegatesTo(ArtifactoryMaven) Closure closure) {
 		ArtifactoryMaven maven = new ArtifactoryMaven(rootNode)
