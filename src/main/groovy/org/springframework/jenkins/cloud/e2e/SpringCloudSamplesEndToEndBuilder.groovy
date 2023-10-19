@@ -20,9 +20,9 @@ class SpringCloudSamplesEndToEndBuilder<T extends SpringCloudSamplesEndToEndBuil
 	String postBuildScripts = ""
 	boolean wipeOutWorkspace = true
 	String jdk = jdk17()
-	boolean mavenTests = false
-	boolean gradleTests = false
-	boolean withNodeJs = false
+	boolean mavenTests
+	boolean gradleTests
+	boolean withNodeJs
 	Map<String, String> envs = [:]
 
 	T withOrganization(String organization) {

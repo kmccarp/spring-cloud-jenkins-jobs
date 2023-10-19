@@ -8,18 +8,18 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class ReleaserOptionsBuilder {
 	String projectName
-	boolean dryRun = false
-	boolean updateSagan = false
-	boolean updateDocumentationRepos = false
-	boolean updateSpringProjects = false
-	boolean updateReleaseTrainWiki = false
-	boolean runUpdatedSamples = false
-	boolean updateAllTestSamples = false
-	boolean updateReleaseTrainDocs = false
-	boolean updateSpringGuides = false
-	boolean updateStartSpringIo = false
-	boolean updateGithubMilestones = false
-	boolean postReleaseOnly = false
+	boolean dryRun
+	boolean updateSagan
+	boolean updateDocumentationRepos
+	boolean updateSpringProjects
+	boolean updateReleaseTrainWiki
+	boolean runUpdatedSamples
+	boolean updateAllTestSamples
+	boolean updateReleaseTrainDocs
+	boolean updateSpringGuides
+	boolean updateStartSpringIo
+	boolean updateGithubMilestones
+	boolean postReleaseOnly
 	String releaseTrainProjectName
 	String releaserConfigUrl
 	String releaserBranch = "main"
